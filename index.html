@@ -2598,25 +2598,87 @@ function closeDropdown(fieldId) {
 }
 
 // ---- Clear Field ----
+// use when the selectedPlace frist comment code use 
+// function clearLocationField(fieldId) {
+//   const input = document.getElementById(`${fieldId}-input`);
+//   const clearBtn = document.getElementById(`${fieldId}-clear`);
+//   const tag = document.getElementById(`${fieldId}-tag`);
+//   const tagText = document.getElementById(`${fieldId}-tag-text`);
+//   const list = document.getElementById(`${fieldId}-list`);
+
+//   input.value = '';
+//   input.classList.remove('selected');
+//   clearBtn.style.display = 'none';
+//   tag.classList.remove('show');
+//   tagText.textContent = '';
+//   list.innerHTML = '';
+//   selectedPlaces[fieldId] = null;
+
+//   closeDropdown(fieldId);
+//   input.focus();
+// }
 function clearLocationField(fieldId) {
+
   const input = document.getElementById(`${fieldId}-input`);
   const clearBtn = document.getElementById(`${fieldId}-clear`);
-  const tag = document.getElementById(`${fieldId}-tag`);
-  const tagText = document.getElementById(`${fieldId}-tag-text`);
   const list = document.getElementById(`${fieldId}-list`);
 
+  // REMOVED:
+  // const tag = document.getElementById(`${fieldId}-tag`);
+  // const tagText = document.getElementById(`${fieldId}-tag-text`);
+
+
+
+  // ================================
+  // RESET INPUT
+  // ================================
   input.value = '';
+
   input.classList.remove('selected');
+
+
+
+  // ================================
+  // HIDE CLEAR BUTTON
+  // ================================
   clearBtn.style.display = 'none';
-  tag.classList.remove('show');
-  tagText.textContent = '';
+
+
+
+  // ================================
+  // REMOVED TAG RESET
+  // ================================
+  // tag.classList.remove('show');
+  // tagText.textContent = '';
+
+
+
+  // ================================
+  // CLEAR DROPDOWN LIST
+  // ================================
   list.innerHTML = '';
+
+
+
+  // ================================
+  // CLEAR STORED DATA
+  // ================================
   selectedPlaces[fieldId] = null;
 
+
+
+  // ================================
+  // CLOSE DROPDOWN
+  // ================================
   closeDropdown(fieldId);
+
+
+
+  // ================================
+  // FOCUS INPUT AGAIN
+  // ================================
   input.focus();
 }
-
 // ---- Get Predictions from Google ----
 function getPredictions(query, fieldId) {
   if (!window.autocompleteService) {
