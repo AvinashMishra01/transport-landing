@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Global Travel Reservations — Where Every Mile Counts</title>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZqr07lycecpdqYVO5axKh8Xn8TeSi6vM&v=weekly&libraries=places&callback=initGooglePlaces" async defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -846,6 +847,617 @@
   z-index: -1;
 }
 
+
+/* google map style   */
+
+
+.location-field {
+  position: relative;
+  margin-bottom: 14px;
+}
+
+.location-field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(14,165,233,0.9);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+/* Input Wrapper */
+.loc-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Input Field */
+.loc-input {
+  width: 100%;
+  padding: 12px 40px 12px 40px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(14,165,233,0.3);
+  border-radius: 10px;
+  color: #F0F9FF;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.loc-input::placeholder {
+  color: rgba(240,249,255,0.35);
+}
+
+.loc-input:focus {
+  border-color: #0EA5E9;
+  background: rgba(255,255,255,0.12);
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.15);
+}
+
+/* Light Theme Input */
+[data-theme="light"] .loc-input {
+  background: #F0F9FF;
+  border-color: #BAE6FD;
+  color: #0C4A6E;
+}
+
+[data-theme="light"] .loc-input::placeholder {
+  color: #94A3B8;
+}
+
+[data-theme="light"] .loc-input:focus {
+  background: #FFFFFF;
+  border-color: #0EA5E9;
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.1);
+}
+
+/* Left Icon */
+.loc-icon-left {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+  z-index: 2;
+  transition: all 0.2s;
+}
+
+/* Loading Spinner */
+.loc-spinner {
+  position: absolute;
+  right: 38px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(14,165,233,0.2);
+  border-top-color: #0EA5E9;
+  border-radius: 50%;
+  animation: locSpin 0.7s linear infinite;
+  display: none;
+}
+
+@keyframes locSpin {
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Clear Button */
+.loc-clear-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(240,249,255,0.35);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px 4px;
+  display: none;
+  line-height: 1;
+  transition: all 0.2s;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+.loc-clear-btn:hover {
+  color: #0EA5E9;
+  background: rgba(14,165,233,0.1);
+}
+
+[data-theme="light"] .loc-clear-btn {
+  color: #94A3B8;
+}
+
+[data-theme="light"] .loc-clear-btn:hover {
+  color: #0EA5E9;
+  background: #EFF6FF;
+}
+
+/* Selected State - Green border */
+.loc-input.selected {
+  border-color: rgba(16,185,129,0.5);
+}
+
+[data-theme="light"] .loc-input.selected {
+  border-color: #10B981;
+  background: #F0FDF4;
+}
+
+/* ===== DROPDOWN ===== */
+.loc-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: #202325;
+  border: 1px solid rgba(14,165,233,0.25);
+  border-radius: 14px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.45);
+  z-index: 99999;
+  overflow: hidden;
+  display: none;
+  min-width: 100%;
+  animation: locDropIn 0.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+[data-theme="light"] .loc-dropdown {
+  background: #FFFFFF;
+  border-color: rgba(14,165,233,0.15);
+  box-shadow: 0 24px 64px rgba(14,165,233,0.12);
+}
+
+@keyframes locDropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.loc-dropdown.open {
+  display: block;
+}
+
+/* Dropdown Header */
+.loc-drop-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px 8px;
+  border-bottom: 1px solid rgba(14,165,233,0.1);
+}
+
+.loc-drop-header-text {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(14,165,233,0.7);
+}
+
+.loc-drop-count {
+  font-size: 10px;
+  color: rgba(240,249,255,0.3);
+  background: rgba(14,165,233,0.1);
+  padding: 2px 7px;
+  border-radius: 20px;
+}
+
+[data-theme="light"] .loc-drop-header {
+  border-bottom-color: #E0F2FE;
+}
+
+[data-theme="light"] .loc-drop-header-text {
+  color: #0284C7;
+}
+
+[data-theme="light"] .loc-drop-count {
+  color: #64748B;
+  background: #EFF6FF;
+}
+
+/* Dropdown List */
+.loc-drop-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.loc-drop-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.loc-drop-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.loc-drop-list::-webkit-scrollbar-thumb {
+  background: rgba(14,165,233,0.3);
+  border-radius: 4px;
+}
+
+/* Prediction Item */
+.loc-pred-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  position: relative;
+}
+
+.loc-pred-item:last-child {
+  border-bottom: none;
+}
+
+.loc-pred-item:hover,
+.loc-pred-item.active {
+  background: rgba(14,165,233,0.1);
+}
+
+[data-theme="light"] .loc-pred-item {
+  border-bottom-color: #F0F9FF;
+}
+
+[data-theme="light"] .loc-pred-item:hover,
+[data-theme="light"] .loc-pred-item.active {
+  background: #EFF6FF;
+}
+
+/* Location Type Icon Box */
+.pred-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: rgba(14,165,233,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.loc-pred-item:hover .pred-icon-box,
+.loc-pred-item.active .pred-icon-box {
+  background: rgba(14,165,233,0.2);
+}
+
+[data-theme="light"] .pred-icon-box {
+  background: #DBEAFE;
+}
+
+[data-theme="light"] .loc-pred-item:hover .pred-icon-box {
+  background: #BFDBFE;
+}
+
+/* Text Content */
+.pred-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.pred-main {
+  font-size: 14px;
+  font-weight: 600;
+  color: #F0F9FF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+  transition: color 0.2s;
+}
+
+[data-theme="light"] .pred-main {
+  color: #0C4A6E;
+}
+
+.pred-sub {
+  font-size: 12px;
+  color: rgba(240,249,255,0.45);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+  transition: color 0.2s;
+}
+
+[data-theme="light"] .pred-sub {
+  color: #64748B;
+}
+
+/* Highlighted Match */
+.pred-highlight {
+  color: #38BDF8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .pred-highlight {
+  color: #0284C7;
+}
+
+/* Type Badge */
+.pred-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.badge-establishment {
+  background: rgba(14,165,233,0.15);
+  color: #7DD3FC;
+}
+
+.badge-geocode {
+  background: rgba(16,185,129,0.15);
+  color: #6EE7B7;
+}
+
+.badge-address {
+  background: rgba(245,158,11,0.15);
+  color: #FCD34D;
+}
+
+.badge-airport {
+  background: rgba(168,85,247,0.15);
+  color: #D8B4FE;
+}
+
+.badge-default {
+  background: rgba(148,163,184,0.15);
+  color: #94A3B8;
+}
+
+[data-theme="light"] .badge-establishment {
+  background: #DBEAFE; color: #1D4ED8;
+}
+[data-theme="light"] .badge-geocode {
+  background: #D1FAE5; color: #065F46;
+}
+[data-theme="light"] .badge-address {
+  background: #FEF3C7; color: #92400E;
+}
+[data-theme="light"] .badge-airport {
+  background: #EDE9FE; color: #5B21B6;
+}
+[data-theme="light"] .badge-default {
+  background: #F1F5F9; color: #475569;
+}
+
+/* Distance Arrow */
+.pred-arrow {
+  font-size: 12px;
+  color: rgba(240,249,255,0.2);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.loc-pred-item:hover .pred-arrow {
+  color: #0EA5E9;
+  transform: translateX(2px);
+}
+
+/* No Results */
+.loc-no-results {
+  padding: 28px 20px;
+  text-align: center;
+}
+
+.loc-no-results-emoji {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.loc-no-results-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(240,249,255,0.6);
+  margin-bottom: 4px;
+}
+
+.loc-no-results-sub {
+  font-size: 12px;
+  color: rgba(240,249,255,0.3);
+}
+
+[data-theme="light"] .loc-no-results-title {
+  color: #475569;
+}
+
+[data-theme="light"] .loc-no-results-sub {
+  color: #94A3B8;
+}
+
+/* Footer - powered by google */
+.loc-drop-footer {
+  padding: 8px 14px;
+  border-top: 1px solid rgba(14,165,233,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.powered-by-google {
+  font-size: 10px;
+  color: rgba(240,249,255,0.25);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.google-logo {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.google-logo .g-blue { color: #4285F4; }
+.google-logo .g-red { color: #EA4335; }
+.google-logo .g-yellow { color: #FBBC04; }
+.google-logo .g-green { color: #34A853; }
+
+[data-theme="light"] .loc-drop-footer {
+  border-top-color: #E0F2FE;
+}
+
+[data-theme="light"] .powered-by-google {
+  color: #CBD5E1;
+}
+
+/* ===== SELECTED LOCATION TAG ===== */
+.loc-selected-tag {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.25);
+  border-radius: 8px;
+  margin-top: 8px;
+  animation: tagFadeIn 0.3s ease;
+}
+
+.loc-selected-tag.show {
+  display: flex;
+}
+
+@keyframes tagFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tag-icon { font-size: 14px; }
+
+.tag-text {
+  font-size: 12px;
+  color: rgba(16,185,129,0.9);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-theme="light"] .loc-selected-tag {
+  background: #F0FDF4;
+  border-color: #BBF7D0;
+}
+
+[data-theme="light"] .tag-text {
+  color: #065F46;
+}
+
+/* ===== DEMO WRAPPER ===== */
+.demo-page {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #0C4A6E 0%, #075985 50%, #0369A1 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.demo-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(14,165,233,0.2);
+  border-radius: 22px;
+  padding: 36px;
+  width: 100%;
+  max-width: 520px;
+  backdrop-filter: blur(16px);
+}
+
+.demo-card h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #7DD3FC;
+  margin-bottom: 4px;
+  font-family: 'Playfair Display', serif;
+}
+
+.demo-card p {
+  font-size: 13px;
+  color: rgba(240,249,255,0.45);
+  margin-bottom: 28px;
+}
+
+.route-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4px 0;
+}
+
+.connector-line {
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(to bottom, rgba(14,165,233,0.4), rgba(14,165,233,0.1));
+  border-radius: 2px;
+}
+
+.connector-icon {
+  position: absolute;
+  font-size: 14px;
+  background: rgba(14,165,233,0.15);
+  border: 1px solid rgba(14,165,233,0.2);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Theme Toggle Button */
+.theme-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgba(14,165,233,0.5);
+  background: rgba(12,74,110,0.9);
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  z-index: 9999;
+}
+
+.theme-btn:hover {
+  transform: scale(1.1);
+  border-color: #0EA5E9;
+}
+
+[data-theme="light"] .theme-btn {
+  background: #FFFFFF;
+  border-color: #0EA5E9;
+}
+
+@media (max-width: 480px) {
+  .demo-card { padding: 24px 18px; }
+}
 </style>
 </head>
 <body>
@@ -992,14 +1604,128 @@
           <button class="search-tab" onclick="setTab(this)">🏨 Hotels</button>
           <button class="search-tab" onclick="setTab(this)">📦 Packages</button>
         </div>
-        <div class="search-field">
+        <!-- <div class="search-field">
           <label>From</label>
           <input type="text" placeholder="City or Airport">
         </div>
         <div class="search-field">
           <label>To</label>
           <input type="text" placeholder="City or Airport">
+        </div> -->
+<!-- FROM LOCATION -->
+<div class="search-field location-field" id="pickup-field">
+  <label>From</label>
+
+  <div class="loc-input-wrapper">
+    <!-- <span class="loc-icon-left">🟢</span> -->
+
+    <input
+      type="text"
+      class="loc-input"
+      id="pickup-input"
+      placeholder="City or Airport"
+      autocomplete="off"
+    />
+
+    <div class="loc-spinner" id="pickup-spinner"></div>
+
+    <button
+      type="button"
+      class="loc-clear-btn"
+      id="pickup-clear"
+    >
+      ✕
+    </button>
+
+    <!-- DROPDOWN -->
+    <div class="loc-dropdown" id="pickup-dropdown">
+
+      <div class="loc-drop-header">
+        <span class="loc-drop-header-text">Suggestions</span>
+        <span class="loc-drop-count" id="pickup-count">
+          0 results
+        </span>
+      </div>
+
+      <div class="loc-drop-list" id="pickup-list"></div>
+
+      <div class="loc-drop-footer">
+        <div class="powered-by-google">
+          Powered by
+          <span class="google-logo">
+            <span class="g-blue">G</span>
+            <span class="g-red">o</span>
+            <span class="g-yellow">o</span>
+            <span class="g-blue">g</span>
+            <span class="g-green">l</span>
+            <span class="g-red">e</span>
+          </span>
         </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- TO LOCATION -->
+<div class="search-field location-field" id="drop-field">
+  <label>To</label>
+
+  <div class="loc-input-wrapper">
+    <!-- <span class="loc-icon-left">🔴</span> -->
+
+    <input
+      type="text"
+      class="loc-input"
+      id="drop-input"
+      placeholder="City or Airport"
+      autocomplete="off"
+    />
+
+    <div class="loc-spinner" id="drop-spinner"></div>
+
+    <button
+      type="button"
+      class="loc-clear-btn"
+      id="drop-clear"
+    >
+      ✕
+    </button>
+
+    <!-- DROPDOWN -->
+    <div class="loc-dropdown" id="drop-dropdown">
+
+      <div class="loc-drop-header">
+        <span class="loc-drop-header-text">Suggestions</span>
+        <span class="loc-drop-count" id="drop-count">
+          0 results
+        </span>
+      </div>
+
+      <div class="loc-drop-list" id="drop-list"></div>
+
+      <div class="loc-drop-footer">
+        <div class="powered-by-google">
+          Powered by
+          <span class="google-logo">
+            <span class="g-blue">G</span>
+            <span class="g-red">o</span>
+            <span class="g-yellow">o</span>
+            <span class="g-blue">g</span>
+            <span class="g-green">l</span>
+            <span class="g-red">e</span>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
         <div class="search-row">
           <div class="search-field">
             <label>Depart</label>
@@ -1025,6 +1751,103 @@
     </div>
   </div>
 </section>
+
+<!-- map dummy  -->
+<!-- <section>
+  <div class="demo-page">
+  <div class="demo-card">
+    <h2>🗺️ Find Your Route</h2>
+    <p>Powered by Google Places API — Search any city, area or address</p>
+
+  
+    <div class="location-field" id="pickup-field">
+      <label>📍 Pickup Location</label>
+      <div class="loc-input-wrapper">
+        <span class="loc-icon-left">🟢</span>
+        <input
+          type="text"
+          class="loc-input"
+          id="pickup-input"
+          placeholder="Enter pickup city or address..."
+          autocomplete="off"
+        />
+        <div class="loc-spinner" id="pickup-spinner"></div>
+        <button class="loc-clear-btn" id="pickup-clear">✕1</button>
+
+  
+        <div class="loc-dropdown" id="pickup-dropdown">
+          <div class="loc-drop-header">
+            <span class="loc-drop-header-text">📍 Suggestions</span>
+            <span class="loc-drop-count" id="pickup-count">0 results</span>
+          </div>
+          <div class="loc-drop-list" id="pickup-list"></div>
+          <div class="loc-drop-footer">
+            <div class="powered-by-google">
+              Powered by
+              <span class="google-logo">
+                <span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    
+      <div class="loc-selected-tag" id="pickup-tag">
+        <span class="tag-icon">✅</span>
+        <span class="tag-text" id="pickup-tag-text"></span>
+      </div>
+    </div>
+
+    
+    <div class="route-connector" style="position:relative;height:28px;">
+      <div class="connector-line"></div>
+      <div class="connector-icon">↕️</div>
+    </div>
+
+
+    <div class="location-field" id="drop-field">
+      <label>🏁 Drop Location</label>
+      <div class="loc-input-wrapper">
+        <span class="loc-icon-left">🔴</span>
+        <input
+          type="text"
+          class="loc-input"
+          id="drop-input"
+          placeholder="Enter drop city or address..."
+          autocomplete="off"
+        />
+        <div class="loc-spinner" id="drop-spinner"></div>
+        <button class="loc-clear-btn" id="drop-clear">✕</button>
+
+       
+        <div class="loc-dropdown" id="drop-dropdown">
+          <div class="loc-drop-header">
+            <span class="loc-drop-header-text">📍 Suggestions</span>
+            <span class="loc-drop-count" id="drop-count">0 results</span>
+          </div>
+          <div class="loc-drop-list" id="drop-list"></div>
+          <div class="loc-drop-footer">
+            <div class="powered-by-google">
+              Powered by
+              <span class="google-logo">
+                <span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="loc-selected-tag" id="drop-tag">
+        <span class="tag-icon">✅</span>
+        <span class="tag-text" id="drop-tag-text"></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section> -->
 
 <!-- TRUST BAR -->
 <div class="trust-bar">
@@ -1418,6 +2241,523 @@ function setTab(btn) {
   btn.closest('.search-tabs').querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
 }
+
+
+// google map integration 
+
+const selectedPlaces = {
+  pickup: null,
+  drop: null
+};
+const timers = {};
+
+// ---- Wait for Google Maps to Load ----
+function initGooglePlaces() {
+  if (typeof google === 'undefined' || !google.maps || !google.maps.places) {
+    setTimeout(initGooglePlaces, 300);
+    return;
+  }
+
+  // Create PlacesService (requires a map or a div)
+  const dummyDiv = document.createElement('div');
+  const map = new google.maps.Map(dummyDiv);
+  window.placesService = new google.maps.places.PlacesService(map);
+
+  // Create AutocompleteService
+  window.autocompleteService = new google.maps.places.AutocompleteService();
+
+  console.log('✅ Google Places initialized');
+
+  // Setup both fields
+  setupLocationField('pickup');
+  setupLocationField('drop');
+}
+
+// ---- Get Place Icon Based on Type ----
+function getPlaceIcon(types) {
+  if (!types) return { icon: '📌', badge: 'badge-default', label: 'Place' };
+
+  if (types.includes('airport')) return { icon: '✈️', badge: 'badge-airport', label: 'Airport' };
+  if (types.includes('lodging') || types.includes('hotel')) return { icon: '🏨', badge: 'badge-establishment', label: 'Hotel' };
+  if (types.includes('restaurant') || types.includes('food')) return { icon: '🍽️', badge: 'badge-establishment', label: 'Restaurant' };
+  if (types.includes('shopping_mall')) return { icon: '🛍️', badge: 'badge-establishment', label: 'Mall' };
+  if (types.includes('hospital')) return { icon: '🏥', badge: 'badge-establishment', label: 'Hospital' };
+  if (types.includes('school') || types.includes('university')) return { icon: '🏫', badge: 'badge-establishment', label: 'Education' };
+  if (types.includes('establishment')) return { icon: '🏢', badge: 'badge-establishment', label: 'Place' };
+  if (types.includes('street_address') || types.includes('route')) return { icon: '🛣️', badge: 'badge-address', label: 'Address' };
+  if (types.includes('locality') || types.includes('city')) return { icon: '🏙️', badge: 'badge-geocode', label: 'City' };
+  if (types.includes('administrative_area_level_1')) return { icon: '🗺️', badge: 'badge-geocode', label: 'State' };
+  if (types.includes('country')) return { icon: '🌍', badge: 'badge-geocode', label: 'Country' };
+  if (types.includes('sublocality') || types.includes('neighborhood')) return { icon: '🏘️', badge: 'badge-geocode', label: 'Area' };
+  if (types.includes('postal_code')) return { icon: '📮', badge: 'badge-address', label: 'Pincode' };
+  if (types.includes('geocode')) return { icon: '📍', badge: 'badge-geocode', label: 'Location' };
+
+  return { icon: '📌', badge: 'badge-default', label: 'Place' };
+}
+
+// ---- Highlight Matched Text ----
+function highlightText(text, query) {
+  if (!text || !query) return text || '';
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regex = new RegExp(`(${escaped})`, 'gi');
+  return text.replace(regex, '<span class="pred-highlight">$1</span>');
+}
+
+// ---- Get Matched Substrings for Highlighting ----
+function getHighlightedDescription(prediction, query) {
+  const description = prediction.description || '';
+  // Use Google's matched_substrings if available
+  if (prediction.matched_substrings && prediction.matched_substrings.length > 0) {
+    let result = description;
+    let highlighted = '';
+    let lastIndex = 0;
+
+    const matches = [...prediction.matched_substrings].sort((a, b) => a.offset - b.offset);
+
+    matches.forEach(match => {
+      highlighted += escapeHtml(description.substring(lastIndex, match.offset));
+      highlighted += `<span class="pred-highlight">${escapeHtml(description.substring(match.offset, match.offset + match.length))}</span>`;
+      lastIndex = match.offset + match.length;
+    });
+
+    highlighted += escapeHtml(description.substring(lastIndex));
+    return highlighted;
+  }
+
+  return highlightText(escapeHtml(description), query);
+}
+
+// ---- Escape HTML ----
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.appendChild(document.createTextNode(text));
+  return div.innerHTML;
+}
+
+// ---- Split Description into Main and Sub ----
+function splitDescription(description) {
+  if (!description) return { main: '', sub: '' };
+  const parts = description.split(',');
+  const main = parts[0].trim();
+  const sub = parts.slice(1).join(',').trim();
+  return { main, sub };
+}
+
+// ---- Render Dropdown ----
+function renderPredictions(predictions, fieldId, query) {
+  const list = document.getElementById(`${fieldId}-list`);
+  const count = document.getElementById(`${fieldId}-count`);
+  const dropdown = document.getElementById(`${fieldId}-dropdown`);
+
+  if (!predictions || predictions.length === 0) {
+    list.innerHTML = `
+      <div class="loc-no-results">
+        <span class="loc-no-results-emoji">🔍</span>
+        <div class="loc-no-results-title">No results found</div>
+        <div class="loc-no-results-sub">Try a different city, area or address</div>
+      </div>
+    `;
+    count.textContent = '0 results';
+    dropdown.classList.add('open');
+    return;
+  }
+
+  count.textContent = `${predictions.length} result${predictions.length > 1 ? 's' : ''}`;
+
+  let html = '';
+
+  predictions.forEach((prediction, index) => {
+    const { icon, badge, label } = getPlaceIcon(prediction.types);
+    const { main, sub } = splitDescription(prediction.description);
+
+    // Build highlighted main text
+    let highlightedMain = main;
+    if (prediction.structured_formatting) {
+      const mainText = prediction.structured_formatting.main_text || main;
+      const mainMatches = prediction.structured_formatting.main_text_matched_substrings || [];
+
+      if (mainMatches.length > 0) {
+        let result = '';
+        let lastIdx = 0;
+        mainMatches.forEach(match => {
+          result += escapeHtml(mainText.substring(lastIdx, match.offset));
+          result += `<span class="pred-highlight">${escapeHtml(mainText.substring(match.offset, match.offset + match.length))}</span>`;
+          lastIdx = match.offset + match.length;
+        });
+        result += escapeHtml(mainText.substring(lastIdx));
+        highlightedMain = result;
+      } else {
+        highlightedMain = escapeHtml(mainText);
+      }
+    }
+
+    const subText = prediction.structured_formatting
+      ? (prediction.structured_formatting.secondary_text || sub)
+      : sub;
+
+    html += `
+      <div
+        class="loc-pred-item"
+        data-place-id="${prediction.place_id}"
+        data-description="${escapeHtml(prediction.description)}"
+        data-field="${fieldId}"
+        data-index="${index}"
+        onclick="selectPlace('${prediction.place_id}', '${escapeHtml(prediction.description)}', '${fieldId}')"
+        onmouseenter="setActiveItem(this, '${fieldId}')"
+      >
+        <div class="pred-icon-box">${icon}</div>
+        <div class="pred-text">
+          <div class="pred-main">${highlightedMain}</div>
+          ${subText ? `<div class="pred-sub">${escapeHtml(subText)}</div>` : ''}
+        </div>
+        <span class="pred-badge ${badge}">${label}</span>
+        <span class="pred-arrow">›</span>
+      </div>
+    `;
+  });
+
+  list.innerHTML = html;
+  dropdown.classList.add('open');
+}
+
+// ---- Set Active Item ----
+function setActiveItem(item, fieldId) {
+  const list = document.getElementById(`${fieldId}-list`);
+  list.querySelectorAll('.loc-pred-item').forEach(i => i.classList.remove('active'));
+  item.classList.add('active');
+}
+
+// ---- Select a Place ----
+
+// use this when location show below selected 
+// function selectPlace(placeId, description, fieldId) {
+//   const input = document.getElementById(`${fieldId}-input`);
+//   const dropdown = document.getElementById(`${fieldId}-dropdown`);
+//   const clearBtn = document.getElementById(`${fieldId}-clear`);
+//   // const tag = document.getElementById(`${fieldId}-tag`);
+//   // const tagText = document.getElementById(`${fieldId}-tag-text`);
+
+//   // Get place details
+//   if (window.placesService) {
+//     window.placesService.getDetails(
+//       {
+//         placeId: placeId,
+//         fields: ['name', 'formatted_address', 'geometry', 'address_components', 'types']
+//       },
+//       (place, status) => {
+//         if (status === google.maps.places.PlacesServiceStatus.OK && place) {
+//           selectedPlaces[fieldId] = {
+//             placeId: placeId,
+//             description: description,
+//             name: place.name,
+//             formattedAddress: place.formatted_address,
+//             lat: place.geometry.location.lat(),
+//             lng: place.geometry.location.lng(),
+//             types: place.types,
+//             addressComponents: place.address_components
+//           };
+
+//           console.log(`✅ ${fieldId} selected:`, selectedPlaces[fieldId]);
+
+//           // You can use these values:
+//           // selectedPlaces[fieldId].lat  -> latitude
+//           // selectedPlaces[fieldId].lng  -> longitude
+//           // selectedPlaces[fieldId].formattedAddress -> full address
+//         }
+//       }
+//     );
+//   }
+
+//   // Update UI
+//   const { main } = splitDescription(description);
+//   input.value = main || description;
+//   input.classList.add('selected');
+
+//   // Show clear button
+//   clearBtn.style.display = 'block';
+
+//   // Show selected tag
+//   tag.classList.add('show');
+//   tagText.textContent = description;
+
+//   // Close dropdown
+//   closeDropdown(fieldId);
+
+//   // Store basic data immediately (before getDetails resolves)
+//   selectedPlaces[fieldId] = {
+//     placeId,
+//     description,
+//     name: main
+//   };
+// }
+
+
+function selectPlace(placeId, description, fieldId) {
+
+  const input = document.getElementById(`${fieldId}-input`);
+  const dropdown = document.getElementById(`${fieldId}-dropdown`);
+  const clearBtn = document.getElementById(`${fieldId}-clear`);
+
+
+
+
+  // ================================
+  // GET PLACE DETAILS
+  // ================================
+  if (window.placesService) {
+
+    window.placesService.getDetails(
+      {
+        placeId: placeId,
+        fields: [
+          'name',
+          'formatted_address',
+          'geometry',
+          'address_components',
+          'types'
+        ]
+      },
+
+      (place, status) => {
+
+        if (
+          status === google.maps.places.PlacesServiceStatus.OK &&
+          place
+        ) {
+
+          selectedPlaces[fieldId] = {
+            placeId: placeId,
+            description: description,
+            name: place.name,
+            formattedAddress: place.formatted_address,
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng(),
+            types: place.types,
+            addressComponents: place.address_components
+          };
+
+          console.log(
+            `✅ ${fieldId} selected:`,
+            selectedPlaces[fieldId]
+          );
+        }
+      }
+    );
+  }
+
+
+
+  // ================================
+  // UPDATE INPUT UI
+  // ================================
+  const { main } = splitDescription(description);
+
+  input.value = main || description;
+
+  input.classList.add('selected');
+
+
+
+  // ================================
+  // SHOW CLEAR BUTTON
+  // ================================
+  clearBtn.style.display = 'block';
+
+
+
+  // ================================
+  // REMOVED SELECTED TAG UI
+  // ================================
+  // tag.classList.add('show');
+  // tagText.textContent = description;
+
+
+
+  // ================================
+  // CLOSE DROPDOWN
+  // ================================
+  closeDropdown(fieldId);
+
+
+
+  // ================================
+  // STORE BASIC DATA IMMEDIATELY
+  // ================================
+  selectedPlaces[fieldId] = {
+    placeId,
+    description,
+    name: main
+  };
+}
+// ---- Close Dropdown ----
+function closeDropdown(fieldId) {
+  const dropdown = document.getElementById(`${fieldId}-dropdown`);
+  if (dropdown) {
+    dropdown.classList.remove('open');
+  }
+}
+
+// ---- Clear Field ----
+function clearLocationField(fieldId) {
+  const input = document.getElementById(`${fieldId}-input`);
+  const clearBtn = document.getElementById(`${fieldId}-clear`);
+  const tag = document.getElementById(`${fieldId}-tag`);
+  const tagText = document.getElementById(`${fieldId}-tag-text`);
+  const list = document.getElementById(`${fieldId}-list`);
+
+  input.value = '';
+  input.classList.remove('selected');
+  clearBtn.style.display = 'none';
+  tag.classList.remove('show');
+  tagText.textContent = '';
+  list.innerHTML = '';
+  selectedPlaces[fieldId] = null;
+
+  closeDropdown(fieldId);
+  input.focus();
+}
+
+// ---- Get Predictions from Google ----
+function getPredictions(query, fieldId) {
+  if (!window.autocompleteService) {
+    console.warn('Google Places not ready yet');
+    return;
+  }
+
+  const spinner = document.getElementById(`${fieldId}-spinner`);
+  spinner.style.display = 'block';
+
+  // ---- THIS IS YOUR EXACT FUNCTION PATTERN ----
+  window.autocompleteService.getPlacePredictions(
+    {
+      input: query,
+      // Remove componentRestrictions to search globally
+      // or keep it for country restriction:
+      // componentRestrictions: { country: 'in' },
+
+      // Optional: bias to specific types
+      types: [], // empty = all types
+      // types: ['(cities)'],     // only cities
+      // types: ['geocode'],      // addresses
+      // types: ['establishment'] // businesses
+    },
+    (predictions, status) => {
+      spinner.style.display = 'none';
+
+      if (
+        status === google.maps.places.PlacesServiceStatus.OK &&
+        predictions &&
+        predictions.length > 0
+      ) {
+        console.log('📍 Predictions:', predictions);
+        renderPredictions(predictions, fieldId, query);
+      } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+        renderPredictions([], fieldId, query);
+      } else {
+        console.warn('Places API status:', status);
+        renderPredictions([], fieldId, query);
+      }
+    }
+  );
+}
+
+// ---- Setup Each Field ----
+function setupLocationField(fieldId) {
+  const input = document.getElementById(`${fieldId}-input`);
+  const clearBtn = document.getElementById(`${fieldId}-clear`);
+
+  if (!input) return;
+
+  // Input event - search as user types
+  input.addEventListener('input', (e) => {
+    const query = e.target.value.trim();
+
+    // Remove selected state when user edits
+    input.classList.remove('selected');
+
+    if (query.length < 2) {
+      closeDropdown(fieldId);
+      clearBtn.style.display = query.length > 0 ? 'block' : 'none';
+      return;
+    }
+
+    clearBtn.style.display = 'block';
+
+    // Debounce 350ms
+    clearTimeout(timers[fieldId]);
+    timers[fieldId] = setTimeout(() => {
+      getPredictions(query, fieldId);
+    }, 350);
+  });
+
+  // Keyboard navigation
+  input.addEventListener('keydown', (e) => {
+    const list = document.getElementById(`${fieldId}-list`);
+    const items = list.querySelectorAll('.loc-pred-item');
+    const active = list.querySelector('.loc-pred-item.active');
+    let idx = Array.from(items).indexOf(active);
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      idx = Math.min(idx + 1, items.length - 1);
+      items.forEach(i => i.classList.remove('active'));
+      if (items[idx]) {
+        items[idx].classList.add('active');
+        items[idx].scrollIntoView({ block: 'nearest' });
+      }
+    }
+
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      idx = Math.max(idx - 1, 0);
+      items.forEach(i => i.classList.remove('active'));
+      if (items[idx]) {
+        items[idx].classList.add('active');
+        items[idx].scrollIntoView({ block: 'nearest' });
+      }
+    }
+
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const activeItem = list.querySelector('.loc-pred-item.active');
+      if (activeItem) activeItem.click();
+    }
+
+    if (e.key === 'Escape') {
+      closeDropdown(fieldId);
+      input.blur();
+    }
+  });
+
+  // Clear button
+  clearBtn.addEventListener('click', () => {
+    clearLocationField(fieldId);
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    const field = document.getElementById(`${fieldId}-field`);
+    if (field && !field.contains(e.target)) {
+      closeDropdown(fieldId);
+    }
+  });
+}
+
+
+
+// ---- Get Selected Data (use this in your form submit) ----
+function getSelectedLocations() {
+  return {
+    pickup: selectedPlaces.pickup,
+    drop: selectedPlaces.drop
+  };
+}
+
+// ---- Init when Google Maps loads ----
+window.initGooglePlaces = initGooglePlaces;
+
+// Start initialization
+// initGooglePlaces();
 </script>
 </body>
 </html>
