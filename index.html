@@ -204,22 +204,57 @@
   }
 
   /* NAV */
+
+
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 60px;
+    padding: 10px 60px;
     background: var(--bg-nav);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border-subtle);
     transition: background var(--transition), border-color var(--transition);
   }
+
+ .nav-logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+
+  /* Premium Glow Effect */
+  background: rgba(255,255,255,0.06);
+  padding: 6px;
+
+  box-shadow:
+    0 0 18px rgba(59,130,246,0.45),
+    0 0 35px rgba(59,130,246,0.25);
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.nav-logo img:hover {
+  transform: scale(1.06);
+  box-shadow:
+    0 0 24px rgba(59,130,246,0.65),
+    0 0 45px rgba(59,130,246,0.35);
+}
+   /*
   .nav-logo {
     font-family: 'Playfair Display', serif;
     font-size: 22px; font-weight: 700;
     color: var(--gold);
     letter-spacing: 0.5px;
     transition: color var(--transition);
-  }
+  } */
   .nav-logo span { color: var(--text-hero); font-weight: 400; transition: color var(--transition); }
   .nav-links { display: flex; gap: 36px; list-style: none; }
   .nav-links a {
@@ -355,7 +390,7 @@
     background: var(--bg-search);
     border: 1px solid var(--bg-search-border);
     border-radius: 20px; 
-    padding: 12px 24px;
+    padding: 12px 20px;
     backdrop-filter: blur(10px);
     transition: all var(--transition);
   }
@@ -1470,7 +1505,10 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Global<span>Travel</span></div>
+   <div class="nav-logo">
+  <img src="./logo.png" alt="Global Travel Reservations Logo">
+</div>
+  <!-- <div class="nav-logo">Global<span>Travel</span>Reservations</div> -->
   <ul class="nav-links">
     <li><a href="#destinations">Destinations</a></li>
     <li><a href="#packages">Packages</a></li>
@@ -1600,7 +1638,9 @@
         <h2>Find Your Journey</h2>
         <p>Search flights, hotels & packages</p>
         <div class="search-tabs">
-          <button class="search-tab active" onclick="setTab(this)">✈ Flights</button>
+          <!-- <button class="search-tab active" onclick="setTab(this)">✈ Flights</button> -->
+          <button class="search-tab active" onclick="setTab(this)">🚉 Trains</button>
+          <button class="search-tab " onclick="setTab(this)">🚘 Cars</button>
           <button class="search-tab" onclick="setTab(this)">🏨 Hotels</button>
           <button class="search-tab" onclick="setTab(this)">📦 Packages</button>
         </div>
