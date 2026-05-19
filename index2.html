@@ -1,0 +1,1415 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Travel Reservations — Where Every Mile Counts</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ===== THEME VARIABLES ===== */
+  :root {
+    --gold: #0EA5E9;
+    --gold-light: #7DD3FC;
+    --gold-dark: #0284C7;
+    --accent: #E8533A;
+    --radius: 16px;
+    --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  [data-theme="light"] {
+    --bg-primary: #F0F9FF;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #E0F2FE;
+    --bg-hero-start: #0C4A6E;
+    --bg-hero-mid: #075985;
+    --bg-hero-end: #0369A1;
+    --bg-card: #FFFFFF;
+    --bg-card-alt: #F0F9FF;
+    --bg-input: #F0F9FF;
+    --bg-input-border: #BAE6FD;
+    --bg-nav: rgba(12, 74, 110, 0.95);
+    --bg-search: rgba(255,255,255,0.12);
+    --bg-search-border: rgba(14,165,233,0.3);
+    --bg-tab: rgba(255,255,255,0.08);
+    --bg-badge: rgba(14,165,233,0.1);
+    --bg-badge-border: rgba(14,165,233,0.25);
+    --bg-trust: #FFFFFF;
+    --bg-why: #F0F9FF;
+    --bg-quote: linear-gradient(135deg, #0C4A6E 0%, #075985 50%, #0369A1 100%);
+    --bg-testimonial: #E0F2FE;
+    --bg-deals: #0C4A6E;
+    --bg-footer: #082F49;
+    --bg-floating: #FFFFFF;
+    --text-primary: #0C4A6E;
+    --text-secondary: #334155;
+    --text-muted: #64748B;
+    --text-light: #F0F9FF;
+    --text-hero: #F0F9FF;
+    --text-hero-sub: rgba(240,249,255,0.7);
+    --text-hero-muted: rgba(240,249,255,0.5);
+    --text-on-gold: #0C4A6E;
+    --text-gold: #0EA5E9;
+    --text-gold-light: #7DD3FC;
+    --shadow-card: 0 4px 24px rgba(14,165,233,0.08);
+    --shadow-hover: 0 20px 50px rgba(14,165,233,0.15);
+    --shadow-img: 0 30px 80px rgba(14,165,233,0.15);
+    --shadow-floating: 0 20px 50px rgba(14,165,233,0.12);
+    --border-subtle: rgba(14,165,233,0.1);
+    --border-card: rgba(14,165,233,0.12);
+    --border-input: #BAE6FD;
+    --divider: rgba(14,165,233,0.15);
+    --icon-bg: rgba(14,165,233,0.08);
+    --dest-overlay: linear-gradient(to top, rgba(12,74,110,0.9) 0%, rgba(12,74,110,0.15) 60%, transparent 100%);
+    --toggle-bg: rgba(255,255,255,0.15);
+    --toggle-hover: rgba(255,255,255,0.25);
+    --pkg-card-bg: rgba(255,255,255,0.06);
+    --pkg-card-border: rgba(14,165,233,0.15);
+    --quote-card-bg: rgba(255,255,255,0.06);
+    --quote-card-border: rgba(14,165,233,0.2);
+    --footer-link: rgba(240,249,255,0.45);
+    --footer-link-hover: #7DD3FC;
+    --footer-text: rgba(240,249,255,0.4);
+    --footer-divider: rgba(255,255,255,0.08);
+    --hero-pattern-1: rgba(14,165,233,0.08);
+    --hero-pattern-2: rgba(56,189,248,0.06);
+  }
+
+  [data-theme="dark"] {
+    --bg-primary: #0F172A;
+    --bg-secondary: #1E293B;
+    --bg-tertiary: #1E293B;
+    --bg-hero-start: #0F172A;
+    --bg-hero-mid: #1E293B;
+    --bg-hero-end: #1E3A5F;
+    --bg-card: #1E293B;
+    --bg-card-alt: #0F172A;
+    --bg-input: #0F172A;
+    --bg-input-border: #334155;
+    --bg-nav: rgba(15,23,42,0.95);
+    --bg-search: rgba(255,255,255,0.04);
+    --bg-search-border: rgba(14,165,233,0.2);
+    --bg-tab: rgba(255,255,255,0.05);
+    --bg-badge: rgba(14,165,233,0.12);
+    --bg-badge-border: rgba(14,165,233,0.3);
+    --bg-trust: #1E293B;
+    --bg-why: #0F172A;
+    --bg-quote: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #1E3A5F 100%);
+    --bg-testimonial: #0F172A;
+    --bg-deals: #0F172A;
+    --bg-footer: #020617;
+    --bg-floating: #1E293B;
+    --text-primary: #F1F5F9;
+    --text-secondary: #CBD5E1;
+    --text-muted: #94A3B8;
+    --text-light: #F1F5F9;
+    --text-hero: #F1F5F9;
+    --text-hero-sub: rgba(241,245,249,0.65);
+    --text-hero-muted: rgb(255 255 255 / 78%);;
+    --text-on-gold: #0F172A;
+    --text-gold: #38BDF8;
+    --text-gold-light: #7DD3FC;
+    --shadow-card: 0 4px 24px rgba(0,0,0,0.3);
+    --shadow-hover: 0 20px 50px rgba(0,0,0,0.4);
+    --shadow-img: 0 30px 80px rgba(0,0,0,0.4);
+    --shadow-floating: 0 20px 50px rgba(0,0,0,0.4);
+    --border-subtle: rgba(14,165,233,0.12);
+    --border-card: rgba(14,165,233,0.15);
+    --border-input: #334155;
+    --divider: rgba(14,165,233,0.12);
+    --icon-bg: rgba(14,165,233,0.1);
+    --dest-overlay: linear-gradient(to top, rgba(15,23,42,0.9) 0%, rgba(15,23,42,0.2) 60%, transparent 100%);
+    --toggle-bg: rgba(255,255,255,0.1);
+    --toggle-hover: rgba(255,255,255,0.2);
+    --pkg-card-bg: rgba(255,255,255,0.04);
+    --pkg-card-border: rgba(14,165,233,0.12);
+    --quote-card-bg: rgba(255,255,255,0.04);
+    --quote-card-border: rgba(14,165,233,0.2);
+    --footer-link: rgba(241,245,249,0.4);
+    --footer-link-hover: #7DD3FC;
+    --footer-text: rgba(241,245,249,0.35);
+    --footer-divider: rgba(255,255,255,0.06);
+    --hero-pattern-1: rgba(14,165,233,0.06);
+    --hero-pattern-2: rgba(56,189,248,0.04);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    overflow-x: hidden;
+    transition: background var(--transition), color var(--transition);
+  }
+
+  /* ===== THEME TOGGLE ===== */
+  .theme-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: var(--bg-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(14,165,233,0.3);
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  .theme-toggle:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 12px 40px rgba(14,165,233,0.4);
+  }
+  .theme-toggle:active {
+    transform: scale(0.95);
+  }
+  .toggle-icon {
+    font-size: 24px;
+    transition: all 0.4s ease;
+    position: absolute;
+  }
+  .sun-icon { opacity: 1; transform: rotate(0deg) scale(1); }
+  .moon-icon { opacity: 0; transform: rotate(-180deg) scale(0.5); }
+  [data-theme="dark"] .sun-icon { opacity: 0; transform: rotate(180deg) scale(0.5); }
+  [data-theme="dark"] .moon-icon { opacity: 1; transform: rotate(0deg) scale(1); }
+
+  /* Toggle glow ring */
+  .theme-toggle::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    opacity: 0;
+    animation: togglePulse 2s infinite;
+  }
+  @keyframes togglePulse {
+    0%, 100% { opacity: 0; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.15); }
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 60px;
+    background: var(--bg-nav);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background var(--transition), border-color var(--transition);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+    transition: color var(--transition);
+  }
+  .nav-logo span { color: var(--text-hero); font-weight: 400; transition: color var(--transition); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: rgba(240,249,255,0.7);
+    text-decoration: none; font-size: 14px; font-weight: 500;
+    letter-spacing: 0.5px; transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta {
+    background: var(--gold); color: var(--text-on-gold);
+    padding: 10px 22px; border-radius: 8px;
+    font-size: 14px; font-weight: 600; text-decoration: none;
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .nav-phone { color: var(--gold-light); font-weight: 600; font-size: 14px; text-decoration: none; transition: color var(--transition); }
+  .nav-phone:hover { color: #FFFFFF; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--bg-hero-start) 0%, var(--bg-hero-mid) 45%, var(--bg-hero-end) 100%);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center;
+    padding-top: 80px;
+    transition: background var(--transition);
+  }
+  .hero-bg-pattern {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 70% 40%, var(--hero-pattern-1) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, var(--hero-pattern-2) 0%, transparent 60%);
+    transition: background-image var(--transition);
+  }
+  .hero-grid-lines {
+    position: absolute; inset: 0; opacity: 0.03;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 420px;
+    gap: 60px; align-items: center;
+    max-width: 1280px; margin: 0 auto;
+    padding: 80px 60px;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--bg-badge);
+    border: 1px solid var(--bg-badge-border);
+    border-radius: 50px; padding: 6px 16px;
+    color: var(--gold-light); font-size: 13px; font-weight: 500;
+    margin-bottom: 28px; letter-spacing: 0.5px;
+    transition: all var(--transition);
+  }
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--gold-light); border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 5.5vw, 72px);
+    line-height: 1.08; font-weight: 700;
+    color: var(--text-hero);
+    margin-bottom: 20px;
+    transition: color var(--transition);
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--gold-light);
+    display: block;
+    transition: color var(--transition);
+  }
+  .hero-sub {
+    font-size: 18px; color: var(--text-hero-sub);
+    line-height: 1.7; max-width: 520px;
+    margin-bottom: 40px; font-weight: 300;
+    transition: color var(--transition);
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--text-on-gold);
+    padding: 16px 32px; border-radius: 10px;
+    font-weight: 700; font-size: 15px; text-decoration: none;
+    transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(14,165,233,0.35); }
+  .btn-outline {
+    background: transparent; color: var(--text-hero);
+    padding: 16px 28px; border-radius: 10px;
+    font-weight: 500; font-size: 15px; text-decoration: none;
+    border: 1px solid rgba(240,249,255,0.25);
+    transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  }
+  .btn-outline:hover { border-color: var(--gold-light); color: var(--gold-light); }
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 48px;
+  }
+  .hero-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700; color: var(--gold-light);
+    transition: color var(--transition);
+  }
+  .hero-stat-label {
+    font-size: 12px; color: var(--text-hero-muted);
+    text-transform: uppercase; letter-spacing: 1px; margin-top: 2px;
+    transition: color var(--transition);
+  }
+
+  /* SEARCH CARD */
+  .search-card {
+    background: var(--bg-search);
+    border: 1px solid var(--bg-search-border);
+    border-radius: 20px; padding: 32px;
+    backdrop-filter: blur(10px);
+    transition: all var(--transition);
+  }
+  .search-card h3 {
+    color: var(--gold-light); font-family: 'Playfair Display', serif;
+    font-size: 20px; margin-bottom: 6px;
+    transition: color var(--transition);
+  }
+  .search-card p { color: var(--text-hero-muted); font-size: 13px; margin-bottom: 24px; transition: color var(--transition); }
+  .search-tabs {
+    display: flex; gap: 4px; background: var(--bg-tab);
+    border-radius: 8px; padding: 4px; margin-bottom: 20px;
+    transition: background var(--transition);
+  }
+  .search-tab {
+    flex: 1; padding: 8px; border-radius: 6px; font-size: 12px; font-weight: 500;
+    color: var(--text-hero-muted); border: none; background: transparent;
+    cursor: pointer; transition: all 0.2s; text-align: center;
+  }
+  .search-tab.active {
+    background: var(--gold); color: var(--text-on-gold);
+  }
+  .search-field { margin-bottom: 14px; }
+  .search-field label {
+    display: block; font-size: 11px; font-weight: 600;
+    color: var(--gold-light); text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 6px; opacity: 0.8; transition: color var(--transition);
+  }
+  .search-field input, .search-field select {
+    width: 100%; padding: 12px 14px;
+    background: var(--bg-search);
+    border: 1px solid var(--bg-search-border);
+    border-radius: 8px; color: var(--text-hero); font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    outline: none; transition: border-color 0.2s, background var(--transition), color var(--transition);
+  }
+  .search-field input::placeholder { color: var(--text-hero-muted); }
+  .search-field input:focus, .search-field select:focus { border-color: var(--gold); }
+  .search-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .search-btn {
+    width: 100%; padding: 14px; margin-top: 8px;
+    background: var(--gold); color: var(--text-on-gold);
+    border: none; border-radius: 10px; font-size: 15px;
+    font-weight: 700; cursor: pointer; transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .search-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .search-note {
+    text-align: center; margin-top: 12px;
+    font-size: 12px; color: var(--text-hero-muted);
+    transition: color var(--transition);
+  }
+  .search-note span { color: var(--gold-light); }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: var(--bg-trust);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 20px 60px;
+    display: flex; align-items: center; justify-content: center; gap: 48px;
+    flex-wrap: wrap;
+    transition: all var(--transition);
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 500; color: var(--text-muted);
+    transition: color var(--transition);
+  }
+  .trust-icon { font-size: 20px; }
+  .trust-divider { width: 1px; height: 30px; background: var(--divider); transition: background var(--transition); }
+
+  /* SECTION STYLES */
+  section { padding: 100px 60px; }
+  .section-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold-dark);
+    background: var(--bg-badge);
+    padding: 5px 12px; border-radius: 4px;
+    margin-bottom: 16px;
+    transition: all var(--transition);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700; color: var(--text-primary);
+    line-height: 1.15; margin-bottom: 14px;
+    transition: color var(--transition);
+  }
+  .section-sub {
+    font-size: 17px; color: var(--text-muted); line-height: 1.7;
+    max-width: 540px;
+    transition: color var(--transition);
+  }
+  .section-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 52px; flex-wrap: wrap; gap: 20px;
+  }
+  .max-w { max-width: 1280px; margin: 0 auto; }
+
+  /* DESTINATIONS */
+  .destinations { background: var(--bg-primary); transition: background var(--transition); }
+  .dest-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 20px;
+  }
+  .dest-card {
+    position: relative; border-radius: var(--radius);
+    overflow: hidden; cursor: pointer;
+    transition: transform 0.3s; aspect-ratio: 4/3;
+  }
+  .dest-card:first-child {
+    grid-column: 1; grid-row: 1 / 3;
+    aspect-ratio: unset; min-height: 480px;
+  }
+  .dest-card:hover { transform: scale(1.01); }
+  .dest-card img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s;
+  }
+  .dest-card:hover img { transform: scale(1.04); }
+  .dest-overlay {
+    position: absolute; inset: 0;
+    background: var(--dest-overlay);
+    transition: background var(--transition);
+  }
+  .dest-info {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 24px 22px;
+  }
+  .dest-badge {
+    display: inline-block;
+    background: var(--accent); color: white;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+    padding: 3px 9px; border-radius: 4px; margin-bottom: 8px;
+  }
+  .dest-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; font-weight: 700;
+    color: white; margin-bottom: 4px;
+  }
+  .dest-card:first-child .dest-name { font-size: 32px; }
+  .dest-country { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 10px; }
+  .dest-price {
+    font-size: 13px; color: rgba(255,255,255,0.6);
+  }
+  .dest-price strong { color: var(--gold-light); font-size: 18px; font-weight: 700; }
+  .dest-old { text-decoration: line-through; color: rgba(255,255,255,0.4); }
+
+  /* POPULAR PACKAGES */
+  .packages { background: var(--bg-hero-start); transition: background var(--transition); }
+  .packages .section-title { color: var(--text-hero); transition: color var(--transition); }
+  .packages .section-sub { color: var(--text-hero-sub); transition: color var(--transition); }
+  .packages .section-tag { color: var(--gold-light); background: var(--bg-badge); transition: all var(--transition); }
+  .pkg-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .pkg-card {
+    background: var(--pkg-card-bg);
+    border: 1px solid var(--pkg-card-border);
+    border-radius: var(--radius);
+    overflow: hidden; transition: all 0.3s; cursor: pointer;
+  }
+  .pkg-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  }
+  .pkg-img { width: 100%; height: 200px; object-fit: cover; }
+  .pkg-body { padding: 22px; }
+  .pkg-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .pkg-tag {
+    font-size: 11px; font-weight: 600; padding: 3px 8px;
+    border-radius: 4px; background: var(--bg-badge);
+    color: var(--gold-light); border: 1px solid var(--bg-badge-border);
+    transition: all var(--transition);
+  }
+  .pkg-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--text-hero); margin-bottom: 8px;
+    transition: color var(--transition);
+  }
+  .pkg-desc { font-size: 13px; color: var(--text-hero-sub); line-height: 1.6; margin-bottom: 20px; transition: color var(--transition); }
+  .pkg-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px;
+  }
+  .pkg-price-old { font-size: 12px; color: var(--text-hero-muted); text-decoration: line-through; display: block; transition: color var(--transition); }
+  .pkg-price-new { font-size: 22px; font-weight: 700; color: var(--gold-light); font-family: 'Playfair Display', serif; transition: color var(--transition); }
+  .pkg-btn {
+    padding: 10px 18px; background: var(--gold); color: var(--text-on-gold);
+    border: none; border-radius: 8px; font-size: 13px; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .pkg-btn:hover { background: var(--gold-light); }
+
+  /* WHY CHOOSE US */
+  .why { background: var(--bg-why); transition: background var(--transition); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .why-visual { position: relative; }
+  .why-main-img {
+    width: 100%; border-radius: 20px; display: block;
+    box-shadow: var(--shadow-img);
+    transition: box-shadow var(--transition);
+  }
+  .why-floating {
+    position: absolute; bottom: -20px; right: -30px;
+    background: var(--bg-floating);
+    border-radius: 16px; padding: 20px 24px;
+    box-shadow: var(--shadow-floating);
+    min-width: 200px;
+    transition: all var(--transition);
+  }
+  .why-floating-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px; font-weight: 700; color: var(--text-primary);
+    transition: color var(--transition);
+  }
+  .why-floating-text { font-size: 13px; color: var(--text-muted); margin-top: 2px; transition: color var(--transition); }
+  .why-floating-stars { color: var(--gold); font-size: 16px; margin-top: 4px; transition: color var(--transition); }
+  .why-feat { display: flex; flex-direction: column; gap: 30px; margin-top: 36px; }
+  .why-feat-item { display: flex; gap: 18px; align-items: flex-start; }
+  .why-feat-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--icon-bg);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+    transition: background var(--transition);
+  }
+  .why-feat-title { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; transition: color var(--transition); }
+  .why-feat-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; transition: color var(--transition); }
+
+  /* QUOTE SECTION */
+  .quote-section {
+    background: var(--bg-quote);
+    padding: 80px 60px;
+    position: relative; overflow: hidden;
+    transition: background var(--transition);
+  }
+  .quote-section::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, var(--hero-pattern-1) 0%, transparent 70%);
+  }
+  .quote-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+  .quote-left h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3.5vw, 42px);
+    color: var(--text-hero); line-height: 1.2;
+    transition: color var(--transition);
+  }
+  .quote-left h2 em { color: var(--gold-light); font-style: italic; transition: color var(--transition); }
+  .quote-left p { color: var(--text-hero-sub); font-size: 15px; line-height: 1.7; margin-top: 16px; transition: color var(--transition); }
+  .quote-phone {
+    margin-top: 24px; display: flex; align-items: center; gap: 12px;
+  }
+  .quote-phone-icon {
+    width: 44px; height: 44px; background: var(--gold);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 18px; transition: background var(--transition);
+  }
+  .quote-phone-num { font-size: 20px; font-weight: 700; color: var(--gold-light); transition: color var(--transition); }
+  .quote-phone-sub { font-size: 12px; color: var(--text-hero-muted); transition: color var(--transition); }
+  .quote-form {
+    background: var(--quote-card-bg);
+    border: 1px solid var(--quote-card-border);
+    border-radius: 20px; padding: 32px;
+    transition: all var(--transition);
+  }
+  .quote-form h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--gold-light); margin-bottom: 6px;
+    transition: color var(--transition);
+  }
+  .quote-form p { font-size: 13px; color: var(--text-hero-muted); margin-bottom: 24px; transition: color var(--transition); }
+  .form-field { margin-bottom: 14px; }
+  .form-field input {
+    width: 100%; padding: 13px 16px;
+    background: var(--bg-search);
+    border: 1px solid var(--bg-search-border);
+    border-radius: 8px; color: var(--text-hero); font-size: 14px;
+    font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.2s, all var(--transition);
+  }
+  .form-field input::placeholder { color: var(--text-hero-muted); }
+  .form-field input:focus { border-color: var(--gold); }
+
+  /* TESTIMONIALS */
+  .testimonials { background: var(--bg-testimonial); transition: background var(--transition); }
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .testi-card {
+    background: var(--bg-card); border-radius: var(--radius);
+    padding: 28px; box-shadow: var(--shadow-card);
+    transition: transform 0.3s, box-shadow var(--transition), background var(--transition);
+  }
+  .testi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .testi-stars { color: var(--gold); font-size: 16px; margin-bottom: 14px; transition: color var(--transition); }
+  .testi-text {
+    font-size: 15px; color: var(--text-secondary); line-height: 1.7;
+    font-style: italic; margin-bottom: 20px;
+    transition: color var(--transition);
+  }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px; color: white;
+    transition: background var(--transition);
+  }
+  .testi-name { font-size: 14px; font-weight: 600; color: var(--text-primary); transition: color var(--transition); }
+  .testi-dest { font-size: 12px; color: var(--text-muted); transition: color var(--transition); }
+
+  /* DEALS STRIP */
+  .deals-strip {
+    background: var(--bg-deals);
+    padding: 60px;
+    transition: background var(--transition);
+  }
+  .deals-inner { max-width: 1280px; margin: 0 auto; }
+  .deals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .deal-card {
+    background: var(--pkg-card-bg);
+    border: 1px solid var(--pkg-card-border);
+    border-radius: 12px; padding: 24px;
+    display: flex; gap: 16px; align-items: center;
+    transition: all 0.2s;
+  }
+  .deal-card:hover { border-color: var(--gold); background: rgba(255,255,255,0.07); }
+  .deal-thumb {
+    width: 72px; height: 72px; border-radius: 10px;
+    object-fit: cover; flex-shrink: 0;
+  }
+  .deal-title { font-size: 15px; font-weight: 600; color: var(--text-hero); margin-bottom: 4px; transition: color var(--transition); }
+  .deal-sub { font-size: 12px; color: var(--text-hero-muted); margin-bottom: 8px; transition: color var(--transition); }
+  .deal-off {
+    font-size: 13px; font-weight: 700; color: var(--accent);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg-footer); padding: 70px 60px 30px;
+    border-top: 1px solid var(--border-subtle);
+    transition: all var(--transition);
+  }
+  .footer-inner { max-width: 1280px; margin: 0 auto; }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 48px;
+    margin-bottom: 50px;
+  }
+  .footer-brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--gold-light); margin-bottom: 14px;
+    transition: color var(--transition);
+  }
+  .footer-brand-desc { font-size: 14px; color: var(--footer-text); line-height: 1.7; margin-bottom: 20px; transition: color var(--transition); }
+  .footer-contact-item {
+    display: flex; gap: 8px; font-size: 13px;
+    color: var(--footer-text); margin-bottom: 8px; align-items: center;
+    transition: color var(--transition);
+  }
+  .footer-contact-item strong { color: var(--text-hero-sub); }
+  .footer-col-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--gold-light);
+    margin-bottom: 20px;
+    transition: color var(--transition);
+  }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a {
+    font-size: 14px; color: var(--footer-link);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--footer-link-hover); }
+  .footer-bottom {
+    border-top: 1px solid var(--footer-divider);
+    padding-top: 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+    transition: border-color var(--transition);
+  }
+  .footer-legal { font-size: 12px; color: var(--footer-text); transition: color var(--transition); }
+  .footer-disclaimer {
+    font-size: 11px; color: var(--footer-text);
+    margin-top: 8px; line-height: 1.6;
+    opacity: 0.7;
+    transition: color var(--transition);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left > * {
+    animation: fadeUp 0.7s ease both;
+  }
+  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero-left > *:nth-child(5) { animation-delay: 0.5s; }
+  .hero-right { animation: fadeUp 0.7s ease 0.3s both; }
+
+  /* SELECT STYLING FIX */
+  .search-field select option {
+    background: #0C4A6E;
+    color: white;
+  }
+  [data-theme="dark"] .search-field select option {
+    background: #1E293B;
+    color: #F1F5F9;
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg-primary); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold-light); }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    nav { padding: 18px 30px; }
+    .nav-links { display: none; }
+    .hero-content { grid-template-columns: 1fr; gap: 40px; padding: 60px 30px; }
+    section { padding: 70px 30px; }
+    .dest-grid { grid-template-columns: 1fr 1fr; }
+    .dest-card:first-child { grid-column: 1 / -1; min-height: 300px; aspect-ratio: 16/7; }
+    .pkg-grid { grid-template-columns: 1fr 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .why-floating { right: 0; bottom: -10px; }
+    .quote-inner { grid-template-columns: 1fr; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .deals-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .trust-bar { padding: 20px 30px; gap: 24px; }
+    .quote-section { padding: 60px 30px; }
+    .deals-strip { padding: 50px 30px; }
+    footer { padding: 50px 30px 24px; }
+  }
+  @media (max-width: 640px) {
+    .dest-grid { grid-template-columns: 1fr; }
+    .pkg-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; gap: 20px; }
+    .footer-top { grid-template-columns: 1fr; }
+    .theme-toggle { bottom: 20px; right: 20px; width: 48px; height: 48px; }
+    .toggle-icon { font-size: 20px; }
+  }
+
+/* ===== BACKGROUND VIDEO STYLES ===== */
+.hero-video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: -2;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(12, 74, 110, 0.4); /* Dark blue tint overlay for readability */
+  z-index: -1;
+}
+
+</style>
+</head>
+<body>
+
+<!-- THEME TOGGLE BUTTON -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme">
+  <span class="toggle-icon sun-icon">☀️</span>
+  <span class="toggle-icon moon-icon">🌙</span>
+</button>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Global<span>Travel</span></div>
+  <ul class="nav-links">
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:+18888513533" class="nav-phone">☎ +1 (888) 851-3533</a>
+</nav>
+
+<!-- HERO -->
+<!-- <section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge">✦ Premium Travel Since 2020</div>
+      <h1>Where Every<em>Mile Counts</em></h1>
+      <p class="hero-sub">Travelling with purpose and passion. Premium flight deals, handpicked hotels, and unforgettable packages crafted by expert travel consultants.</p>
+      <div class="hero-actions">
+        <a href="#packages" class="btn-primary">✈ Explore Deals</a>
+        <a href="tel:+18888513533" class="btn-outline">📞 Call Us Free</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">500+</div>
+          <div class="hero-stat-label">Airlines</div>
+        </div>
+        <div style="width:1px;background:rgba(14,165,233,0.2);height:40px;align-self:center;"></div>
+        <div>
+          <div class="hero-stat-num">1.2M</div>
+          <div class="hero-stat-label">Hotels Worldwide</div>
+        </div>
+        <div style="width:1px;background:rgba(14,165,233,0.2);height:40px;align-self:center;"></div>
+        <div>
+          <div class="hero-stat-num">24/7</div>
+          <div class="hero-stat-label">Expert Support</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="search-card">
+        <h3>Find Your Journey</h3>
+        <p>Search flights, hotels & packages</p>
+        <div class="search-tabs">
+          <button class="search-tab active" onclick="setTab(this)">✈ Flights</button>
+          <button class="search-tab" onclick="setTab(this)">🏨 Hotels</button>
+          <button class="search-tab" onclick="setTab(this)">📦 Packages</button>
+        </div>
+        <div class="search-field">
+          <label>From</label>
+          <input type="text" placeholder="City or Airport">
+        </div>
+        <div class="search-field">
+          <label>To</label>
+          <input type="text" placeholder="City or Airport">
+        </div>
+        <div class="search-row">
+          <div class="search-field">
+            <label>Depart</label>
+            <input type="date">
+          </div>
+          <div class="search-field">
+            <label>Return</label>
+            <input type="date">
+          </div>
+        </div>
+        <div class="search-field">
+          <label>Passengers</label>
+          <select>
+            <option value="1">1 Adult</option>
+            <option value="2">2 Adults</option>
+            <option value="3">3 Adults</option>
+            <option value="4">2 Adults + 1 Child</option>
+          </select>
+        </div>
+        <button class="search-btn" onclick="alert('Our agents are available 24/7 — call +1 (888) 851-3533 for instant booking!')">🔍 Search Flights</button>
+        <p class="search-note">🔒 Secure. <span>Best Price Guarantee.</span> No hidden fees.</p>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Background Video -->
+  <div class="hero-video-container">
+    <video autoplay muted loop playsinline class="hero-video"  poster="./fallback.jpg">
+      <source src="./home.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero-overlay"></div>
+  </div>
+
+  <!-- Existing Patterns & Grid Lines (Optional - you can remove if video looks better without) -->
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-grid-lines"></div>
+
+  <!-- Content -->
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge">✦ Premium Travel Since 2020</div>
+      <h1>Where Every<em>Mile Counts</em></h1>
+      <p class="hero-sub">Travelling with purpose and passion. Premium flight deals, handpicked hotels, and unforgettable packages crafted by expert travel consultants.</p>
+      <div class="hero-actions">
+        <a href="#packages" class="btn-primary">✈ Explore Deals</a>
+        <a href="tel:+18888513533" class="btn-outline">📞 Call Us Free</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">500+</div>
+          <div class="hero-stat-label">Airlines</div>
+        </div>
+        <div style="width:1px;background:rgba(14,165,233,0.2);height:40px;align-self:center;"></div>
+        <div>
+          <div class="hero-stat-num">1.2M</div>
+          <div class="hero-stat-label">Hotels Worldwide</div>
+        </div>
+        <div style="width:1px;background:rgba(14,165,233,0.2);height:40px;align-self:center;"></div>
+        <div>
+          <div class="hero-stat-num">24/7</div>
+          <div class="hero-stat-label">Expert Support</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="search-card">
+        <h3>Find Your Journey</h3>
+        <p>Search flights, hotels & packages</p>
+        <div class="search-tabs">
+          <button class="search-tab active" onclick="setTab(this)">✈ Flights</button>
+          <button class="search-tab" onclick="setTab(this)">🏨 Hotels</button>
+          <button class="search-tab" onclick="setTab(this)">📦 Packages</button>
+        </div>
+        <div class="search-field">
+          <label>From</label>
+          <input type="text" placeholder="City or Airport">
+        </div>
+        <div class="search-field">
+          <label>To</label>
+          <input type="text" placeholder="City or Airport">
+        </div>
+        <div class="search-row">
+          <div class="search-field">
+            <label>Depart</label>
+            <input type="date">
+          </div>
+          <div class="search-field">
+            <label>Return</label>
+            <input type="date">
+          </div>
+        </div>
+        <div class="search-field">
+          <label>Passengers</label>
+          <select>
+            <option value="1">1 Adult</option>
+            <option value="2">2 Adults</option>
+            <option value="3">3 Adults</option>
+            <option value="4">2 Adults + 1 Child</option>
+          </select>
+        </div>
+        <button class="search-btn" onclick="alert('Our agents are available 24/7 — call +1 (888) 851-3533 for instant booking!')">🔍 Search Flights</button>
+        <p class="search-note">🔒 Secure. <span>Best Price Guarantee.</span> No hidden fees.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="trust-icon">✅</span> Best Price Guarantee</div>
+  <div class="trust-divider"></div>
+  <div class="trust-item"><span class="trust-icon">📞</span> 24/7 Live Support</div>
+  <div class="trust-divider"></div>
+  <div class="trust-item"><span class="trust-icon">✈</span> 500+ Airlines Covered</div>
+  <div class="trust-divider"></div>
+  <div class="trust-item"><span class="trust-icon">🏨</span> 1.2M+ Hotels Worldwide</div>
+  <div class="trust-divider"></div>
+  <div class="trust-item"><span class="trust-icon">🔒</span> 100% Secure Booking</div>
+</div>
+
+<!-- DESTINATIONS -->
+<section class="destinations" id="destinations">
+  <div class="max-w">
+    <div class="section-header">
+      <div>
+        <span class="section-tag">Top Destinations</span>
+        <h2 class="section-title">Popular Destinations</h2>
+        <p class="section-sub">Explore premium travel deals to the world's most coveted destinations.</p>
+      </div>
+      <a href="#packages" class="btn-primary" style="font-size:14px;padding:12px 24px;">View All →</a>
+    </div>
+    <div class="dest-grid">
+      <div class="dest-card">
+        <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80" alt="London">
+        <div class="dest-overlay"></div>
+        <div class="dest-info">
+          <span class="dest-badge">28% OFF</span>
+          <div class="dest-name">London</div>
+          <div class="dest-country">United Kingdom · 5 Days</div>
+          <div class="dest-price"><span class="dest-old">$2,662</span> &nbsp;<strong>from $1,929</strong></div>
+        </div>
+      </div>
+      <div class="dest-card">
+        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80" alt="Paris">
+        <div class="dest-overlay"></div>
+        <div class="dest-info">
+          <span class="dest-badge">30% OFF</span>
+          <div class="dest-name">Paris</div>
+          <div class="dest-country">France · 7 Days</div>
+          <div class="dest-price"><span class="dest-old">$2,873</span> &nbsp;<strong>from $2,009</strong></div>
+        </div>
+      </div>
+      <div class="dest-card">
+        <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=80" alt="Dubai">
+        <div class="dest-overlay"></div>
+        <div class="dest-info">
+          <span class="dest-badge">37% OFF</span>
+          <div class="dest-name">Dubai</div>
+          <div class="dest-country">UAE · 6 Days</div>
+          <div class="dest-price"><span class="dest-old">$3,220</span> &nbsp;<strong>from $2,025</strong></div>
+        </div>
+      </div>
+      <div class="dest-card">
+        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80" alt="Tokyo">
+        <div class="dest-overlay"></div>
+        <div class="dest-info">
+          <span class="dest-badge">22% OFF</span>
+          <div class="dest-name">Tokyo</div>
+          <div class="dest-country">Japan · 8 Days</div>
+          <div class="dest-price"><span class="dest-old">$3,980</span> &nbsp;<strong>from $2,899</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages" id="packages">
+  <div class="max-w">
+    <div class="section-header">
+      <div>
+        <span class="section-tag">Luxury Travel Deals ✈</span>
+        <h2 class="section-title">Trending Packages</h2>
+        <p class="section-sub">Handpicked by our experts — premium flights, stays & curated experiences.</p>
+      </div>
+    </div>
+    <div class="pkg-grid">
+      <div class="pkg-card">
+        <img class="pkg-img" src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600&q=80" alt="Oahu">
+        <div class="pkg-body">
+          <div class="pkg-tags">
+            <span class="pkg-tag">Tour</span>
+            <span class="pkg-tag">5 Days</span>
+            <span class="pkg-tag">Hawaii</span>
+          </div>
+          <div class="pkg-title">5-Day Oahu: Pearl Harbor & Diamond Head</div>
+          <div class="pkg-desc">Explore Honolulu's vibrant culture, the historic Pearl Harbor memorial, and stunning Diamond Head crater.</div>
+          <div class="pkg-footer">
+            <div>
+              <span class="pkg-price-old">from $711</span>
+              <span class="pkg-price-new">$634</span>
+            </div>
+            <button class="pkg-btn">Book Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="pkg-card">
+        <img class="pkg-img" src="https://images.unsplash.com/photo-1599833975787-5c143f373c30?w=600&q=80" alt="Stonehenge">
+        <div class="pkg-body">
+          <div class="pkg-tags">
+            <span class="pkg-tag">Featured</span>
+            <span class="pkg-tag">Day Trip</span>
+            <span class="pkg-tag">UK</span>
+          </div>
+          <div class="pkg-title">Stonehenge, Windsor Castle & Bath from London</div>
+          <div class="pkg-desc">A legendary day journey through England's most iconic historic sites, departing daily from central London.</div>
+          <div class="pkg-footer">
+            <div>
+              <span class="pkg-price-old">Was $465</span>
+              <span class="pkg-price-new">$350</span>
+            </div>
+            <button class="pkg-btn">Book Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="pkg-card">
+        <img class="pkg-img" src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=600&q=80" alt="African Safari">
+        <div class="pkg-body">
+          <div class="pkg-tags">
+            <span class="pkg-tag">Multi-day</span>
+            <span class="pkg-tag">Safari</span>
+            <span class="pkg-tag">Africa</span>
+          </div>
+          <div class="pkg-title">Africa — Amazing African Safari</div>
+          <div class="pkg-desc">Witness the raw beauty of Africa's wildlife — the Big Five, sweeping savannahs, and breathtaking sunsets.</div>
+          <div class="pkg-footer">
+            <div>
+              <span class="pkg-price-old">&nbsp;</span>
+              <span class="pkg-price-new">$850</span>
+            </div>
+            <button class="pkg-btn">Book Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="why" id="why">
+  <div class="max-w">
+    <div class="why-grid">
+      <div class="why-visual">
+        <img class="why-main-img" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=700&q=80" alt="Travel">
+        <div class="why-floating">
+          <div class="why-floating-num">4.9/5</div>
+          <div class="why-floating-text">Average Customer Rating</div>
+          <div class="why-floating-stars">★★★★★</div>
+        </div>
+      </div>
+      <div>
+        <span class="section-tag">Why Choose Us</span>
+        <h2 class="section-title">Your Journey, Our Expertise</h2>
+        <p class="section-sub">We combine unmatched purchasing power, expert knowledge, and 24/7 support to make every trip perfect.</p>
+        <div class="why-feat">
+          <div class="why-feat-item">
+            <div class="why-feat-icon">💰</div>
+            <div>
+              <div class="why-feat-title">Competitive Pricing</div>
+              <div class="why-feat-desc">With 500+ airline suppliers and buying power of 300M+ members, we consistently secure better prices than booking direct.</div>
+            </div>
+          </div>
+          <div class="why-feat-item">
+            <div class="why-feat-icon">🏆</div>
+            <div>
+              <div class="why-feat-title">Award-Winning Service</div>
+              <div class="why-feat-desc">Travel worry-free knowing our experts are here 24 hours a day, 7 days a week to assist with any need.</div>
+            </div>
+          </div>
+          <div class="why-feat-item">
+            <div class="why-feat-icon">🌍</div>
+            <div>
+              <div class="why-feat-title">Worldwide Coverage</div>
+              <div class="why-feat-desc">Over 1,200,000 hotels in 200+ countries, flights to 5,000+ cities, and exclusive member-only rates.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE / CONTACT -->
+<div class="quote-section" id="contact">
+  <div class="quote-inner">
+    <div class="quote-left">
+      <h2>Get a <em>Free Quote</em> from Our Travel Experts</h2>
+      <p>Our dedicated consultants will craft a personalized itinerary with exclusive deals unavailable online. No commitment required.</p>
+      <div class="quote-phone">
+        <div class="quote-phone-icon">📞</div>
+        <div>
+          <div class="quote-phone-num">+1 (888) 851-3533</div>
+          <div class="quote-phone-sub">Exclusive phone-only deals available</div>
+        </div>
+      </div>
+    </div>
+    <div class="quote-form">
+      <h3>Request Free Quote</h3>
+      <p>We'll respond within 2 hours during business hours</p>
+      <div class="form-field">
+        <input type="text" placeholder="Full Name">
+      </div>
+      <div class="form-field">
+        <input type="email" placeholder="Email Address">
+      </div>
+      <div class="form-field">
+        <input type="tel" placeholder="Phone Number">
+      </div>
+      <div class="form-field">
+        <input type="text" placeholder="Where would you like to go?">
+      </div>
+      <button class="search-btn" onclick="alert('Thank you! One of our expert consultants will contact you shortly. Or call us now: +1 (888) 851-3533')">Get My Free Quote →</button>
+      <p style="text-align:center;margin-top:12px;font-size:12px;color:var(--text-hero-muted);transition:color 0.4s;">🔒 Your information is 100% secure and never shared.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="max-w">
+    <div class="section-header">
+      <div>
+        <span class="section-tag">Traveler Stories</span>
+        <h2 class="section-title">What Our Clients Say</h2>
+      </div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Booked a Dubai package and the price was unbeatable. The team handled everything — flights, hotel, transfers. Absolutely seamless experience."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">JM</div>
+          <div>
+            <div class="testi-name">James Mitchell</div>
+            <div class="testi-dest">Dubai, UAE</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Called their hotline at midnight with a flight change issue. Problem solved in 20 minutes. That level of service is rare and genuinely impressive."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SR</div>
+          <div>
+            <div class="testi-name">Sarah Reynolds</div>
+            <div class="testi-dest">London, UK</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"The Africa Safari package was a dream. Every detail was taken care of and the guides they recommended were extraordinary. 10/10 would rebook."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AP</div>
+          <div>
+            <div class="testi-name">Aisha Patel</div>
+            <div class="testi-dest">Kenya Safari</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TODAY'S DEALS -->
+<div class="deals-strip">
+  <div class="deals-inner">
+    <div style="margin-bottom:32px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+      <div>
+        <span class="section-tag" style="color:var(--gold-light);background:var(--bg-badge);transition:all 0.4s;">Limited Time</span>
+        <h2 style="font-family:'Playfair Display',serif;font-size:32px;color:var(--text-hero);margin-top:8px;transition:color 0.4s;">Today's Top Deals</h2>
+      </div>
+    </div>
+    <div class="deals-grid">
+      <div class="deal-card">
+        <img class="deal-thumb" src="https://images.unsplash.com/photo-1541628951107-a9af5346a3e4?w=200&q=80" alt="Europe">
+        <div>
+          <div class="deal-title">Experience Europe Your Way</div>
+          <div class="deal-sub">Multi-city European adventure</div>
+          <div class="deal-off">🔥 Up to 30% Off</div>
+        </div>
+      </div>
+      <div class="deal-card">
+        <img class="deal-thumb" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=200&q=80" alt="Hotels">
+        <div>
+          <div class="deal-title">Save Big on Hotels</div>
+          <div class="deal-sub">Member-exclusive hotel rates</div>
+          <div class="deal-off">🔥 Save up to $400/night</div>
+        </div>
+      </div>
+      <div class="deal-card">
+        <img class="deal-thumb" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=200&q=80" alt="Miles">
+        <div>
+          <div class="deal-title">Earn Miles on Every Hotel</div>
+          <div class="deal-sub">Asiana Club partner program</div>
+          <div class="deal-off">🔥 Double miles this month</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Global Travel Reservations</div>
+        <p class="footer-brand-desc">"Where Every Mile Counts — Travelling with Purpose and Passion." An independent travel agency delivering premium experiences worldwide.</p>
+        <div class="footer-contact-item">📍 30 N Gould St Ste N, Sheridan, WY 82801, USA</div>
+        <div class="footer-contact-item">📧 <a href="mailto:support@globaltravelsreservations.com" style="color:var(--gold);text-decoration:none;transition:color 0.4s;">support@globaltravelsreservations.com</a></div>
+        <div class="footer-contact-item">📞 <strong><a href="tel:+18888513533" style="color:var(--gold-light);text-decoration:none;transition:color 0.4s;">+1 (888) 851-3533</a></strong></div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Destinations</a></li>
+          <li><a href="#">Packages</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Refund Policy</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Quick Contact</div>
+        <p style="font-size:13px;color:var(--footer-text);margin-bottom:16px;line-height:1.6;transition:color 0.4s;">Our travel experts are available around the clock to assist you.</p>
+        <a href="tel:+18888513533" class="btn-primary" style="display:inline-flex;font-size:14px;padding:12px 20px;">📞 Call Now — Free</a>
+        <p style="margin-top:14px;font-size:13px;color:var(--gold);transition:color 0.4s;">Exclusive phone-only deals available</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>
+        <p class="footer-legal">© 2023–2026 Global Travel Reservations LLC. All Rights Reserved.</p>
+        <p class="footer-disclaimer">Global Travel Reservations LLC (globaltravelsreservations.com) is an independent travel agency. We are not affiliated with airlines, hotels, or other travel companies; any names shown are for reference only.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+
+// Check saved theme or system preference
+function getPreferredTheme() {
+  const saved = localStorage.getItem('theme');
+  if (saved) return saved;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+// Apply theme
+function setTheme(theme) {
+  html.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+}
+
+// Initialize
+setTheme(getPreferredTheme());
+
+// Toggle click
+themeToggle.addEventListener('click', () => {
+  const current = html.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  setTheme(next);
+});
+
+// Listen for system preference changes
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  if (!localStorage.getItem('theme')) {
+    setTheme(e.matches ? 'dark' : 'light');
+  }
+});
+
+// Search Tabs
+function setTab(btn) {
+  btn.closest('.search-tabs').querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
