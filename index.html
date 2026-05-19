@@ -13,6 +13,8 @@
   :root {
     --gold: #0EA5E9;
     --gold-light: #7DD3FC;
+    --badge-light: #fbfbfb;
+    --badge-pointer: #00ff41;
     --gold-dark: #0284C7;
     --accent: #E8533A;
     --radius: 16px;
@@ -31,7 +33,8 @@
     --bg-input: #F0F9FF;
     --bg-input-border: #BAE6FD;
     --bg-nav: rgba(12, 74, 110, 0.95);
-    --bg-search: rgba(255,255,255,0.12);
+    /* --bg-search: rgba(255,255,255,0.12); */
+     --bg-search: rgb(29 27 27 / 69%);
     --bg-search-border: rgba(14,165,233,0.3);
     --bg-tab: rgba(255,255,255,0.08);
     --bg-badge: rgba(14,165,233,0.1);
@@ -89,11 +92,14 @@
     --bg-input: #0F172A;
     --bg-input-border: #334155;
     --bg-nav: rgba(15,23,42,0.95);
-    --bg-search: rgba(255,255,255,0.04);
+    /* --bg-search: rgba(255,255,255,0.04); */
+        --bg-search: rgb(29 27 27 / 69%);
     --bg-search-border: rgba(14,165,233,0.2);
     --bg-tab: rgba(255,255,255,0.05);
-    --bg-badge: rgba(14,165,233,0.12);
-    --bg-badge-border: rgba(14,165,233,0.3);
+    /* --bg-badge: rgba(14,165,233,0.12); */
+    --bg-badge: rgb(0 154 180 / 55%);
+    /* --bg-badge-border: rgba(14,165,233,0.3); */
+    --bg-badge-border: rgb(255 255 255 / 86%);
     --bg-trust: #1E293B;
     --bg-why: #0F172A;
     --bg-quote: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #1E3A5F 100%);
@@ -248,7 +254,7 @@
   /* HERO */
   .hero {
     min-height: 100vh;
-    background: linear-gradient(160deg, var(--bg-hero-start) 0%, var(--bg-hero-mid) 45%, var(--bg-hero-end) 100%);
+    /* background: linear-gradient(160deg, var(--bg-hero-start) 0%, var(--bg-hero-mid) 45%, var(--bg-hero-end) 100%); */
     position: relative; overflow: hidden;
     display: flex; align-items: center;
     padding-top: 80px;
@@ -273,20 +279,20 @@
     display: grid; grid-template-columns: 1fr 420px;
     gap: 60px; align-items: center;
     max-width: 1280px; margin: 0 auto;
-    padding: 80px 60px;
+    /* padding: 80px 60px; */
   }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
     background: var(--bg-badge);
     border: 1px solid var(--bg-badge-border);
     border-radius: 50px; padding: 6px 16px;
-    color: var(--gold-light); font-size: 13px; font-weight: 500;
+    color: var(--badge-light); font-size: 13px; font-weight: 500;
     margin-bottom: 28px; letter-spacing: 0.5px;
     transition: all var(--transition);
   }
   .hero-badge::before {
     content: ''; width: 6px; height: 6px;
-    background: var(--gold-light); border-radius: 50%;
+    background: var(--badge-pointer); border-radius: 50%;
     animation: pulse 2s infinite;
   }
   @keyframes pulse {
@@ -295,7 +301,7 @@
   }
   .hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(42px, 5.5vw, 72px);
+    font-size: clamp(42px, 4.5vw, 72px);
     line-height: 1.08; font-weight: 700;
     color: var(--text-hero);
     margin-bottom: 20px;
@@ -347,16 +353,18 @@
   .search-card {
     background: var(--bg-search);
     border: 1px solid var(--bg-search-border);
-    border-radius: 20px; padding: 32px;
+    border-radius: 20px; 
+    padding: 12px 24px;
     backdrop-filter: blur(10px);
     transition: all var(--transition);
   }
-  .search-card h3 {
+  .search-card h2 {
     color: var(--gold-light); font-family: 'Playfair Display', serif;
-    font-size: 20px; margin-bottom: 6px;
+    font-size: 30px; 
+    /* margin-bottom: 6px; */
     transition: color var(--transition);
   }
-  .search-card p { color: var(--text-hero-muted); font-size: 13px; margin-bottom: 24px; transition: color var(--transition); }
+  .search-card p { color: var(--text-hero-muted); font-size: 13px; margin-bottom: 15px; transition: color var(--transition); }
   .search-tabs {
     display: flex; gap: 4px; background: var(--bg-tab);
     border-radius: 8px; padding: 4px; margin-bottom: 20px;
@@ -377,7 +385,7 @@
     margin-bottom: 6px; opacity: 0.8; transition: color var(--transition);
   }
   .search-field input, .search-field select {
-    width: 100%; padding: 12px 14px;
+    width: 100%; padding: 10px 14px;
     background: var(--bg-search);
     border: 1px solid var(--bg-search-border);
     border-radius: 8px; color: var(--text-hero); font-size: 14px;
@@ -388,7 +396,7 @@
   .search-field input:focus, .search-field select:focus { border-color: var(--gold); }
   .search-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .search-btn {
-    width: 100%; padding: 14px; margin-top: 8px;
+    width: 100%; padding: 10px; margin-top: 5px;
     background: var(--gold); color: var(--text-on-gold);
     border: none; border-radius: 10px; font-size: 15px;
     font-weight: 700; cursor: pointer; transition: all 0.2s;
@@ -937,7 +945,7 @@
 <section class="hero">
   <!-- Background Video -->
   <div class="hero-video-container">
-    <video autoplay muted loop playsinline class="hero-video"  poster="./fallback.jpg">
+    <video autoplay muted loop playsinline class="hero-video"  >
       <source src="./home.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
@@ -977,7 +985,7 @@
     </div>
     <div class="hero-right">
       <div class="search-card">
-        <h3>Find Your Journey</h3>
+        <h2>Find Your Journey</h2>
         <p>Search flights, hotels & packages</p>
         <div class="search-tabs">
           <button class="search-tab active" onclick="setTab(this)">✈ Flights</button>
