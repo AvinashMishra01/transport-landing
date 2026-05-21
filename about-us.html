@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Global Travel Reservations</title>
+<meta name="description" content="Learn about the mission and values of Global Travel Reservations. Discover why we are the leading experts in providing incredible travel deals and personalized service.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* All CSS from previous pages is reused for consistency. New styles are added for team/stats sections. */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --transition: 0.4s cubic-bezier(0.4,0,0.2,1); }
+[data-theme="light"] { --bg-primary: #F0F9FF; --bg-secondary: #FFFFFF; --bg-nav: rgba(12,74,110,0.96); --bg-hero: linear-gradient(135deg, #0C4A6E 0%, #075985 50%, #0369A1 100%); --bg-card: #FFFFFF; --bg-highlight: #EFF6FF; --bg-badge: rgba(14,165,233,0.08); --text-primary: #0C4A6E; --text-secondary: #334155; --text-muted: #64748B; --text-gold: #0EA5E9; --border-color: rgba(14,165,233,0.12); --border-strong: rgba(14,165,233,0.25); --shadow-card: 0 4px 24px rgba(14,165,233,0.08); --divider: rgba(14,165,233,0.1); --gold: #0EA5E9; --gold-light: #7DD3FC; }
+[data-theme="dark"] { --bg-primary: #0F172A; --bg-secondary: #1E293B; --bg-nav: rgba(15,23,42,0.96); --bg-hero: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #1E3A5F 100%); --bg-card: #1E293B; --bg-highlight: rgba(14,165,233,0.08); --bg-badge: rgba(14,165,233,0.12); --text-primary: #F1F5F9; --text-secondary: #CBD5E1; --text-muted: #94A3B8; --text-gold: #38BDF8; --border-color: rgba(14,165,233,0.12); --border-strong: rgba(14,165,233,0.25); --shadow-card: 0 4px 24px rgba(0,0,0,0.3); --divider: rgba(255,255,255,0.06); --gold: #38BDF8; --gold-light: #7DD3FC; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-secondary); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 16px 60px; background: var(--bg-nav); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(14,165,233,0.15); }
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-text { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #FFFFFF; }
+.nav-logo-text span { color: #7DD3FC; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-phone { color: #7DD3FC; font-weight: 600; font-size: 14px; text-decoration: none; }
+.theme-toggle { position: fixed; bottom: 28px; right: 28px; z-index: 999; width: 52px; height: 52px; border-radius: 50%; border: 2px solid var(--gold); background: var(--bg-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 8px 28px rgba(14,165,233,0.25); transition: all 0.3s ease; }
+.theme-toggle:hover { transform: scale(1.1) rotate(15deg); }
+.page-hero { background: var(--bg-hero); padding: 140px 60px 80px; position: relative; overflow: hidden; }
+.hero-grid-lines { position: absolute; inset: 0; opacity: 0.03; background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 60px 60px; }
+.page-hero-inner { max-width: 860px; margin: 0 auto; text-align: center; position: relative; z-index: 2; }
+.page-hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(14,165,233,0.12); border: 1px solid rgba(14,165,233,0.25); border-radius: 50px; padding: 6px 16px; color: #7DD3FC; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 20px; }
+.page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 56px); font-weight: 700; color: #FFFFFF; line-height: 1.1; margin-bottom: 16px; }
+.page-hero h1 em { color: #7DD3FC; font-style: italic; }
+.page-hero-desc { font-size: 17px; color: rgba(240,249,255,0.65); line-height: 1.7; max-width: 620px; margin: 0 auto 28px; }
+.page-meta { display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; }
+.page-meta-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(240,249,255,0.45); }
+.page-meta-item strong { color: rgba(240,249,255,0.7); }
+.page-layout { max-width: 1100px; margin: 0 auto; padding: 60px 40px 100px; display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: start; }
+.sidebar { position: sticky; top: 90px; display: flex; flex-direction: column; gap: 24px; }
+.sidebar-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 24px; box-shadow: var(--shadow-card); }
+.sidebar-title { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.mission-text { font-size: 14px; line-height: 1.7; color: var(--text-muted); }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: center; }
+.stat-item .stat-num { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: var(--text-primary); }
+.stat-item .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+.main-content { min-width: 0; }
+.content-section { margin-bottom: 52px; }
+.section-header { text-align: center; margin-bottom: 40px; }
+.section-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; background: var(--bg-badge); padding: 5px 12px; border-radius: 20px; }
+.section-title { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; }
+.section-subtitle { font-size: 16px; color: var(--text-muted); max-width: 580px; margin: 0 auto; line-height: 1.7; }
+.intro-text { font-size: 17px; line-height: 1.8; color: var(--text-secondary); margin-bottom: 24px; padding: 24px; background: var(--bg-card); border-radius: 16px; border-left: 4px solid var(--gold); box-shadow: var(--shadow-card); }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.service-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; text-align: center; transition: all 0.3s ease; }
+.service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(14,165,233,0.12); }
+.service-icon { font-size: 32px; margin-bottom: 16px; }
+.service-title { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+.service-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+.team-card { background: var(--bg-card); border-radius: 16px; text-align: center; padding: 20px; overflow: hidden; position: relative; box-shadow: var(--shadow-card); transition: all 0.3s ease; }
+.team-card:hover { transform: translateY(-8px); box-shadow: 0 16px 40px rgba(14,165,233,0.15); }
+.team-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; border: 4px solid var(--bg-highlight); }
+.team-name { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+.team-role { font-size: 12px; color: var(--gold); font-weight: 600; margin-top: 2px; }
+.disclaimer-box { margin-top: 40px; padding: 20px; border: 1px dashed var(--border-color); border-radius: 12px; background: var(--bg-highlight); }
+.disclaimer-text { font-size: 13px; color: var(--text-muted); text-align: center; line-height: 1.6; }
+footer { background: #082F49; padding: 50px 60px 28px; border-top: 1px solid rgba(14,165,233,0.1); }
+[data-theme="dark"] footer { background: #020617; }
+.footer-inner { max-width: 1100px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+.footer-brand-name { font-family: 'Playfair Display', serif; font-size: 20px; color: #7DD3FC; margin-bottom: 12px; }
+.footer-brand-desc { font-size: 13px; color: rgba(240,249,255,0.35); line-height: 1.7; margin-bottom: 16px; }
+.footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #7DD3FC; margin-bottom: 16px; }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 8px; }
+.footer-links a { font-size: 13px; color: rgba(240,249,255,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: #7DD3FC; }
+.footer-links a.active-link { color: #0EA5E9; font-weight: 600; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px; }
+.footer-legal { font-size: 12px; color: rgba(240,249,255,0.25); }
+@media (max-width: 900px) { .page-layout { grid-template-columns: 1fr; } .sidebar { position: static; grid-row: 1; } nav { padding: 16px 24px; } .nav-links { display: none; } .page-hero { padding: 120px 24px 60px; } footer { padding: 40px 24px 24px; } .footer-top { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- THEME TOGGLE -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 52 52" fill="none" width="28" height="28">
+      <circle cx="26" cy="26" r="20" fill="rgba(14,165,233,0.12)" stroke="#0EA5E9" stroke-width="1.5"/>
+      <ellipse cx="26" cy="26" rx="20" ry="8" stroke="rgba(14,165,233,0.5)" stroke-width="1" fill="none"/>
+      <ellipse cx="26" cy="26" rx="10" ry="20" stroke="rgba(14,165,233,0.5)" stroke-width="1" fill="none"/>
+      <line x1="6" y1="26" x2="46" y2="26" stroke="rgba(14,165,233,0.35)" stroke-width="1"/>
+    </svg>
+    <span class="nav-logo-text">Global<span>Travel</span></span>
+  </a>
+  <div class="nav-right">
+    <a href="tel:+18888513533" class="nav-phone">☎ +1 (888) 851-3533</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-grid-lines"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-badge">✈️ Your Expert Travel Partners</div>
+    <h1>Our Story, <em>Your Journey</em></h1>
+    <p class="page-hero-desc">
+      Discover the mission, values, and people behind Global Travel Reservations. We're dedicated to crafting unforgettable travel experiences with a personal touch.
+    </p>
+    <div class="page-meta">
+      <div class="page-meta-item">📅 <strong>Founded:</strong> 2020</div>
+      <div class="page-meta-item">🌍 <strong>Destinations:</strong> 200+ Countries</div>
+      <div class="page-meta-item">🤝 <strong>Team:</strong> 50+ Global Experts</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="page-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-title">🎯 Our Mission</div>
+      <p class="mission-text">
+        To be the leading platform for personalized travel, connecting commuters with incredible deals and expert agents worldwide. We strive to make every journey seamless, flexible, and perfectly tailored to your needs.
+      </p>
+    </div>
+    <div class="sidebar-card">
+      <div class="sidebar-title">📊 By The Numbers</div>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-num" data-target="500">0</div>
+          <div class="stat-label">Airlines</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-target="1200000">0</div>
+          <div class="stat-label">Hotels</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-target="10000">0</div>
+          <div class="stat-label">Happy Travelers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-target="98">0</div>
+          <div class="stat-label">Satisfaction %</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <section class="content-section">
+      <p class="intro-text">
+        Everyone needs a change from their daily routine. At <strong>GlobalTravelReservation.com</strong>, we believe that change should be exciting, not expensive. As a leading travel platform, we leverage our direct contacts with travel service providers to bring you incredible deals. Our global team of experienced agents works as your personal travel advocate, crafting journeys that meet your unique needs and budget.
+      </p>
+    </section>
+    
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-tag">Our Offerings</span>
+        <h2 class="section-title">What We Do Best</h2>
+        <p class="section-subtitle">We provide a comprehensive suite of services to ensure your travel is smooth, affordable, and perfectly planned from start to finish.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">📦</div>
+          <h3 class="service-title">Custom Vacation Packages</h3>
+          <p class="service-desc">Get customized packages for your friends, family, or solo adventures, tailored to your exact needs and requirements.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">👨‍👩‍👧‍👦</div>
+          <h3 class="service-title">Group Bookings</h3>
+          <p class="service-desc">Traveling with 10 or more passengers? We offer low-cost group packages with extensive facilities to make your journey memorable.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔄</div>
+          <h3 class="service-title">Booking Flexibility</h3>
+          <p class="service-desc">Plans change. We understand every circumstance and provide you with maximum flexibility to modify or cancel your bookings.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">✨</div>
+          <h3 class="service-title">Special Assistance</h3>
+          <p class="service-desc">Need to add special assistance to your trip? We can arrange all necessary facilities at the best possible prices.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-tag">Our Promise</span>
+        <h2 class="section-title">Why Choose Us?</h2>
+        <p class="section-subtitle">We are committed to delivering outstanding value and a travel experience that is completely unique to you.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">💎</div>
+          <h3 class="service-title">Outstanding Value</h3>
+          <p class="service-desc">Our expert agents, located near you, specialize in providing personalized vacation packages that offer the best journey anywhere.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🤝</div>
+          <h3 class="service-title">Dedicated Team</h3>
+          <p class="service-desc">Our team has in-depth knowledge of each destination. Discuss your needs and receive the best guidance for your travel package.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">😊</div>
+          <h3 class="service-title">100% Satisfaction</h3>
+          <p class="service-desc">We prioritize flexibility and your needs. We ensure you are completely satisfied and can enjoy your travel to the fullest.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎁</div>
+          <h3 class="service-title">Redeem Reward Points</h3>
+          <p class="service-desc">Earn reward points with every booking and redeem them on future trips or additional services to decrease your travel costs.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎧</div>
+          <h3 class="service-title">24/7 Customer Support</h3>
+          <p class="service-desc">Our dedicated customer support team is available 24 hours a day to clear all your travel booking queries in the shortest time possible.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="content-section">
+      <div class="section-header">
+        <span class="section-tag">Our People</span>
+        <h2 class="section-title">Meet Our Experts</h2>
+        <p class="section-subtitle">Our team is a blend of passionate travelers and industry veterans dedicated to making your dream trip a reality.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop" alt="Founder" class="team-img">
+          <h3 class="team-name">John D. Carter</h3>
+          <p class="team-role">Founder & CEO</p>
+        </div>
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop" alt="Travel Consultant" class="team-img">
+          <h3 class="team-name">Maria Garcia</h3>
+          <p class="team-role">Lead Travel Consultant</p>
+        </div>
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1557862921-37829c790f19?w=200&h=200&fit=crop" alt="Head of Operations" class="team-img">
+          <h3 class="team-name">David Chen</h3>
+          <p class="team-role">Head of Operations</p>
+        </div>
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop" alt="Customer Support Lead" class="team-img">
+          <h3 class="team-name">Emily White</h3>
+          <p class="team-role">Customer Support Lead</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="disclaimer-box">
+      <p class="disclaimer-text"><strong>Disclaimer:</strong> Global Travel Reservations LLC (globaltravelsreservations.com) is an independent travel agency. We are not affiliated with airlines, hotels, or other travel companies; any names shown are for reference only.</p>
+    </div>
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Global Travel Reservations</div>
+        <p class="footer-brand-desc">"Where Every Mile Counts — Travelling with Purpose and Passion."</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about-us.html" class="active-link">About Us</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-links">
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="refund-policy.html">Refund Policy</a></li>
+          <li><a href="terms.html">Terms & Conditions</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-legal">© 2023–2026 Global Travel Reservations LLC. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+function getTheme(){return localStorage.getItem('gtr-theme')||'light';}
+function applyTheme(theme){html.setAttribute('data-theme',theme);localStorage.setItem('gtr-theme',theme);themeToggle.textContent=theme==='dark'?'🌙':'☀️';}
+applyTheme(getTheme());
+themeToggle.addEventListener('click',()=>{applyTheme(getTheme()==='light'?'dark':'light');});
+
+// Animated Counter
+function animateCounters() {
+  const counters = document.querySelectorAll('.stat-num');
+  const speed = 200; // a smaller number means faster animation
+
+  counters.forEach(counter => {
+    const target = +counter.getAttribute('data-target');
+    
+    const updateCount = () => {
+      const count = +counter.innerText.replace(/,/g, '');
+      const increment = Math.max(target / speed, 1);
+      
+      if (count < target) {
+        let newCount = Math.ceil(count + increment);
+        if (newCount > target) newCount = target;
+        
+        // Format number with commas for large numbers
+        if (target >= 1000) {
+          counter.innerText = newCount.toLocaleString('en-US');
+        } else {
+          counter.innerText = newCount;
+        }
+        
+        setTimeout(updateCount, 15);
+      } else {
+        if (target >= 1000) {
+          counter.innerText = target.toLocaleString('en-US');
+        } else {
+          counter.innerText = target;
+        }
+      }
+    };
+    updateCount();
+  });
+}
+
+const statsSection = document.querySelector('.stats-grid');
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounters();
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+if(statsSection) {
+  observer.observe(statsSection);
+}
+</script>
+</body>
+</html>

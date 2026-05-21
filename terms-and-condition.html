@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms and Conditions — Global Travel Reservations</title>
+<meta name="description" content="Read the terms and conditions for booking with Global Travel Reservations. Understand your agreement with us and our travel partners.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* All CSS styles from the previous pages are reused here for consistency. */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --transition: 0.4s cubic-bezier(0.4,0,0.2,1); }
+[data-theme="light"] { --bg-primary: #F0F9FF; --bg-secondary: #FFFFFF; --bg-nav: rgba(12,74,110,0.96); --bg-hero: linear-gradient(135deg, #0C4A6E 0%, #075985 50%, #0369A1 100%); --bg-card: #FFFFFF; --bg-highlight: #EFF6FF; --bg-badge: rgba(14,165,233,0.08); --text-primary: #0C4A6E; --text-secondary: #334155; --text-muted: #64748B; --text-gold: #0EA5E9; --border-color: rgba(14,165,233,0.12); --border-strong: rgba(14,165,233,0.25); --shadow-card: 0 4px 24px rgba(14,165,233,0.08); --shadow-hover: 0 12px 40px rgba(14,165,233,0.14); --divider: rgba(14,165,233,0.1); --gold: #0EA5E9; --gold-light: #7DD3FC; }
+[data-theme="dark"] { --bg-primary: #0F172A; --bg-secondary: #1E293B; --bg-nav: rgba(15,23,42,0.96); --bg-hero: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #1E3A5F 100%); --bg-card: #1E293B; --bg-highlight: rgba(14,165,233,0.08); --bg-badge: rgba(14,165,233,0.12); --text-primary: #F1F5F9; --text-secondary: #CBD5E1; --text-muted: #94A3B8; --text-gold: #38BDF8; --border-color: rgba(14,165,233,0.12); --border-strong: rgba(14,165,233,0.25); --shadow-card: 0 4px 24px rgba(0,0,0,0.3); --shadow-hover: 0 12px 40px rgba(0,0,0,0.4); --divider: rgba(255,255,255,0.06); --gold: #38BDF8; --gold-light: #7DD3FC; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-secondary); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 16px 60px; background: var(--bg-nav); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(14,165,233,0.15); transition: background var(--transition); }
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-text { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #FFFFFF; }
+.nav-logo-text span { color: #7DD3FC; }
+.nav-links { display: none; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-phone { color: #7DD3FC; font-weight: 600; font-size: 14px; text-decoration: none; transition: color 0.2s; }
+.nav-phone:hover { color: #FFFFFF; }
+.theme-toggle { position: fixed; bottom: 28px; right: 28px; z-index: 999; width: 52px; height: 52px; border-radius: 50%; border: 2px solid var(--gold); background: var(--bg-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 8px 28px rgba(14,165,233,0.25); transition: all 0.3s ease; }
+.theme-toggle:hover { transform: scale(1.1) rotate(15deg); }
+.page-hero { background: var(--bg-hero); padding: 140px 60px 80px; position: relative; overflow: hidden; }
+.hero-grid-lines { position: absolute; inset: 0; opacity: 0.03; background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 60px 60px; }
+.page-hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 2; }
+.page-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(240,249,255,0.5); margin-bottom: 20px; }
+.page-breadcrumb a { color: rgba(240,249,255,0.5); text-decoration: none; transition: color 0.2s; }
+.page-breadcrumb a:hover { color: #7DD3FC; } .page-breadcrumb .sep { color: rgba(240,249,255,0.25); } .page-breadcrumb .current { color: #7DD3FC; }
+.page-hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(14,165,233,0.12); border: 1px solid rgba(14,165,233,0.25); border-radius: 50px; padding: 6px 16px; color: #7DD3FC; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 20px; }
+.page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 56px); font-weight: 700; color: #FFFFFF; line-height: 1.1; margin-bottom: 16px; }
+.page-hero h1 em { color: #7DD3FC; font-style: italic; }
+.page-hero-desc { font-size: 17px; color: rgba(240,249,255,0.65); line-height: 1.7; max-width: 620px; margin-bottom: 28px; }
+.page-meta { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.page-meta-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(240,249,255,0.45); }
+.page-meta-item strong { color: rgba(240,249,255,0.7); }
+.page-layout { max-width: 1100px; margin: 0 auto; padding: 60px 40px 100px; display: grid; grid-template-columns: 1fr 300px; gap: 48px; align-items: start; }
+.toc-card { position: sticky; top: 90px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 24px; box-shadow: var(--shadow-card); }
+.toc-title { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.toc-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.toc-list li a { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: all 0.2s ease; border-left: 2px solid transparent; }
+.toc-list li a:hover, .toc-list li a.active { color: var(--gold); background: var(--bg-badge); border-left-color: var(--gold); padding-left: 14px; }
+.toc-num { width: 20px; height: 20px; border-radius: 50%; background: var(--bg-badge); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: var(--gold); flex-shrink: 0; }
+.toc-divider { height: 1px; background: var(--divider); margin: 16px 0; }
+.toc-contact { background: var(--bg-badge); border-radius: 12px; padding: 16px; text-align: center; }
+.toc-contact-title { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
+.toc-contact-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5; }
+.toc-contact-btn { display: block; width: 100%; padding: 10px 16px; background: var(--gold); color: #0C4A6E; border: none; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none; text-align: center; cursor: pointer; transition: all 0.2s; }
+.toc-contact-btn:hover { background: var(--gold-light); }
+[data-theme="dark"] .toc-contact-btn { color: #0F172A; }
+.policy-content { min-width: 0; }
+.policy-alert { display: flex; gap: 14px; padding: 20px 22px; border-radius: 14px; margin-bottom: 36px; border-left: 4px solid; background: var(--bg-highlight); border-left-color: var(--gold); }
+.alert-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+.alert-text { font-size: 14px; line-height: 1.7; }
+[data-theme="light"] .alert-text { color: #0C4A6E; } [data-theme="dark"] .alert-text { color: var(--text-secondary); }
+.alert-text strong { font-weight: 700; }
+.policy-section { margin-bottom: 52px; scroll-margin-top: 100px; }
+.policy-section-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--divider); }
+.section-icon-box { width: 48px; height: 48px; border-radius: 12px; background: var(--bg-badge); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.section-num { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.policy-section h2 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--text-primary); line-height: 1.2; margin: 0; }
+.policy-section p { font-size: 15px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px; }
+.policy-section p:last-child { margin-bottom: 0; }
+.info-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px; padding: 22px 24px; margin: 20px 0; box-shadow: var(--shadow-card); }
+.info-card-title { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.policy-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+.policy-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.6; padding: 10px 14px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; }
+.list-bullet { color: var(--gold); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.list-text { flex: 1; }
+.list-text strong { font-weight: 600; color: var(--text-primary); }
+.service-table { width: 100%; border-collapse: collapse; margin: 20px 0; border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-card); }
+.service-table thead { background: var(--gold); }
+.service-table thead th { padding: 14px 18px; text-align: left; font-size: 12px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #0C4A6E; }
+[data-theme="dark"] .service-table thead th { color: #0F172A; }
+.service-table tbody tr { background: var(--bg-card); border-bottom: 1px solid var(--divider); }
+.service-table tbody tr:last-child { border-bottom: none; }
+.service-table tbody tr:hover { background: var(--bg-highlight); }
+.service-table tbody td { padding: 14px 18px; font-size: 14px; line-height: 1.5; }
+.service-table .td-label { font-weight: 600; color: var(--text-primary); }
+footer { background: #082F49; padding: 50px 60px 28px; border-top: 1px solid rgba(14,165,233,0.1); }
+[data-theme="dark"] footer { background: #020617; }
+.footer-inner { max-width: 1100px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+.footer-brand-name { font-family: 'Playfair Display', serif; font-size: 20px; color: #7DD3FC; margin-bottom: 12px; }
+.footer-brand-desc { font-size: 13px; color: rgba(240,249,255,0.35); line-height: 1.7; margin-bottom: 16px; }
+.footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #7DD3FC; margin-bottom: 16px; }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 8px; }
+.footer-links a { font-size: 13px; color: rgba(240,249,255,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: #7DD3FC; }
+.footer-links a.active-link { color: #0EA5E9; font-weight: 600; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px; }
+.footer-legal { font-size: 12px; color: rgba(240,249,255,0.25); }
+@media (max-width: 900px) { .page-layout { grid-template-columns: 1fr; padding: 40px 24px 80px; } .toc-card { position: static; } nav { padding: 16px 24px; } footer { padding: 40px 24px 24px; } .footer-top { grid-template-columns: 1fr; } }
+
+/* page css  */
+.container { max-width: 860px; margin: 0 auto; padding: 40px 24px 100px; }
+
+  h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--text-primary);
+    margin-top: 36px; margin-bottom: 14px;
+    transition: color var(--transition);
+  }
+  h1 { font-size: clamp(32px, 5vw, 46px); margin-top: 70px; line-height: 1.15; }
+  h2 { font-size: 22px; border-bottom: 2px solid var(--border-subtle); padding-bottom: 8px; }
+  h3 { font-size: 18px; margin-top: 24px; }
+
+  p, li { margin-bottom: 16px; font-size: 16px; }
+  ul { padding-left: 22px; }
+  li { margin-bottom: 10px; }
+
+  a { color: var(--gold); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  a:hover { color: var(--gold-light); text-decoration: underline; }
+
+  .last-updated { font-size: 14px; color: var(--text-muted); margin-bottom: 28px; }
+
+  .highlight {
+    background: var(--bg-tertiary);
+    padding: 18px 20px;
+    border-radius: 12px;
+    border-left: 4px solid var(--gold);
+    margin: 28px 0;
+    font-size: 15px;
+  }
+
+  .contact-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-input);
+    padding: 24px;
+    border-radius: 14px;
+    margin-top: 36px;
+    box-shadow: 0 4px 20px rgba(14,165,233,0.06);
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin: 20px 0 28px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    border: 1px solid var(--border-input);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: 15px;
+  }
+  th {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  .btn-back {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--gold); font-weight: 600; margin-bottom: 20px; font-size: 15px;
+  }
+  .btn-back:hover { text-decoration: none; color: var(--gold-light); }
+
+  .disclaimer {
+    margin-top: 48px; font-size: 13px; color: var(--text-muted);
+    border-top: 1px solid var(--border-subtle); padding-top: 18px; line-height: 1.7;
+  }
+
+  /* Theme Toggle */
+  .theme-toggle {
+    position: fixed; bottom: 30px; right: 30px; z-index: 999;
+    width: 56px; height: 56px; border-radius: 50%;
+    border: 2px solid var(--gold); background: var(--bg-secondary);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 32px rgba(14,165,233,0.3); transition: all 0.3s ease;
+  }
+  .theme-toggle:hover { transform: scale(1.1) rotate(15deg); }
+  .toggle-icon { font-size: 24px; transition: all 0.4s ease; position: absolute; }
+  .sun-icon { opacity: 1; transform: rotate(0deg) scale(1); }
+  .moon-icon { opacity: 0; transform: rotate(-180deg) scale(0.5); }
+  [data-theme="dark"] .sun-icon { opacity: 0; transform: rotate(180deg) scale(0.5); }
+  [data-theme="dark"] .moon-icon { opacity: 1; transform: rotate(0deg) scale(1); }
+
+  @media (max-width: 640px) {
+    .container { padding: 30px 18px 80px; }
+    h1 { margin-top: 50px; }
+    .theme-toggle { bottom: 20px; right: 20px; width: 48px; height: 48px; }
+  }
+
+/* end page css  */
+</style>
+</head>
+<body>
+
+<!-- THEME TOGGLE -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 52 52" fill="none" width="28" height="28">
+      <circle cx="26" cy="26" r="20" fill="rgba(14,165,233,0.12)" stroke="#0EA5E9" stroke-width="1.5"/>
+      <ellipse cx="26" cy="26" rx="20" ry="8" stroke="rgba(14,165,233,0.5)" stroke-width="1" fill="none"/>
+      <ellipse cx="26" cy="26" rx="10" ry="20" stroke="rgba(14,165,233,0.5)" stroke-width="1" fill="none"/>
+      <line x1="6" y1="26" x2="46" y2="26" stroke="rgba(14,165,233,0.35)" stroke-width="1"/>
+    </svg>
+    <span class="nav-logo-text">Global<span>Travel</span></span>
+  </a>
+  <div class="nav-right">
+    <a href="tel:+18888513533" class="nav-phone">☎ +1 (888) 851-3533</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-grid-lines"></div>
+  <div class="page-hero-inner">
+    <div class="page-breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">›</span>
+      <span class="current">Terms & Conditions</span>
+    </div>
+    <div class="page-hero-badge">⚖️ Our Legal Agreement</div>
+    <h1>Terms &amp; <em>Conditions</em></h1>
+    <p class="page-hero-desc">
+      Please read these terms carefully before using our services. They govern your relationship with Global Travel Reservations and our travel partners.
+    </p>
+    <div class="page-meta">
+      <div class="page-meta-item">📅 <strong>Last Updated:</strong> January 1, 2025</div>
+      <div class="page-meta-item">📖 <strong>Reading Time:</strong> ~7 minutes</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="container">
+  <!-- <a href="index.html" class="btn-back">← Back to Home</a>
+  <h1>Terms & Conditions</h1>
+  <p class="last-updated">Last Updated: <span id="currentDate"></span></p> -->
+
+  <p>These Terms and Conditions, together with any other written information we brought to your attention during the process of confirming your booking, apply to your booking with <strong>Global Travel Reservations</strong> (trading as <strong>GlobalTravelReservation</strong>). Please read these Terms and Conditions carefully prior to using the GlobalTravelReservation website and making any bookings.</p>
+
+  <div class="highlight">
+    <strong>By using this Site or making a booking, you agree to these Terms and Conditions without qualification.</strong> If you do not agree with any portion of these Terms and Conditions, you may not use the website or make a booking.
+  </div>
+
+  <p>All communications concerning customer service or your booking must be sent to GlobalTravelReservation or emailed to: <a href="mailto:info@GlobalTravelReservation.com">info@GlobalTravelReservation.com</a>.</p>
+
+  <h2>1) Contract</h2>
+  <p>When making your reservation, we act as an <strong>agent</strong> to arrange your booking with the principal(s) or other supplier(s) (such as tour operator / airline / cruise company / hotel / accommodation provider, etc.) as specified on your receipt(s). Depending on your booking, you may enter into:</p>
+  <ul>
+    <li>a single contract with one principal/supplier (e.g., a package holiday), or</li>
+    <li>separate contracts with multiple principals/suppliers (e.g., flights, hotels, transfers booked independently).</li>
+  </ul>
+  <p>As an agent, we take <strong>no responsibility</strong> for the acts, omissions, or failures of the principal(s) or supplier(s), or for the services they provide. The principal(s) or supplier(s)’ Terms & Conditions apply to your booking, and we strongly recommend you read them carefully as they contain important information about your reservation. Please request copies if you do not have them.</p>
+
+  <h2>2) Booking</h2>
+  <ul>
+    <li>Passengers must ensure that all names, dates, and travel details are accurate as per their passport/travel documents and that the itinerary is correct.</li>
+    <li>Changes may not be permitted after tickets/documents are issued, and amendments may incur additional charges imposed by suppliers.</li>
+    <li>During the booking process, details will be read back/confirmed with you and, where applicable, with the principal(s) or supplier(s). Upon receipt of travel documents, please check names, dates, and timings immediately and notify us of any discrepancies.</li>
+    <li>Unless otherwise stated, tickets and travel documents are <strong>non-refundable, non-changeable, and non-transferable</strong>.</li>
+    <li>The booking information you provide may be shared with relevant suppliers and, where required by law or authorities (e.g., customs/immigration), with public authorities. This may include sensitive information (disabilities, dietary/religious requirements). If we cannot pass required information to suppliers, we may be unable to complete your booking. By making a booking, you consent to this processing as described.</li>
+    <li>Airfares are guaranteed only upon ticketing. If there is an issue with payment, we will notify you promptly by email/phone; otherwise, tickets are typically issued within <strong>48 hours</strong> of booking (subject to supplier processing times).</li>
+    <li>Baggage allowances vary by route, cabin/class, and airline policy. Airlines may charge for checked baggage, excess baggage, or other optional services. Please confirm current baggage rules directly with the airline.</li>
+    <li>Passengers must arrive at the airport at least <strong>3 hours</strong> prior to departure. Tickets are generally non-refundable/non-changeable due to no-shows.</li>
+    <li>Passengers are responsible for obtaining and carrying all required travel documents and visas for the full journey (including transit). Visas must be obtained prior to ticket issuance where required.</li>
+  </ul>
+
+  <h2>3) Payment</h2>
+  <ul>
+    <li>Customers may be required to pay a deposit or full amount at the time of booking. If a partial payment is made, the balance must be paid by the stated due date. Failure to pay may result in cancellation by the principal(s) or supplier(s), which may include cancellation fees as set out in their Terms & Conditions.</li>
+    <li>Unless otherwise stated, all amounts paid are held on behalf of the relevant principal(s) or supplier(s).</li>
+    <li>All prices shown are in <strong>USD</strong> unless otherwise indicated.</li>
+  </ul>
+
+  <h2>4) Insurance</h2>
+  <ul>
+    <li>We strongly recommend purchasing adequate travel insurance to cover you and your party. Some suppliers require insurance as a condition of booking, and certain destinations may make travel insurance compulsory—please check with the relevant embassy or official government guidance.</li>
+    <li>Travel insurance may cover cancellation, medical assistance/repatriation, loss of baggage/money, and other expenses. Coverage may also be available for supplier/financial failure (where offered).</li>
+    <li>If insurance is arranged through us, please review the policy details carefully to ensure accuracy and that all required information has been provided. Failure to provide accurate information may affect coverage.</li>
+  </ul>
+
+  <h2>5) Delivery of Documents</h2>
+  <ul>
+    <li>Documents (invoices/tickets/insurance policies) sent by post are dispatched to the address provided. Once posted, we accept no liability for loss unless caused by our negligence.</li>
+    <li>If tickets or documents must be reissued due to loss (and not caused by our negligence), reissuance costs are payable by you.</li>
+    <li>Alternative delivery methods may be available upon request and may incur additional charges.</li>
+  </ul>
+
+  <h2>6) Passports, Visas & Health</h2>
+  <ul>
+    <li>While we can provide general guidance on passport and visa requirements, it is <strong>your responsibility</strong> to confirm requirements with the relevant embassies/consulates. We and our suppliers accept no responsibility if you cannot travel due to non-compliance.</li>
+    <li>For air travel, airlines may require specific photographic identification; please confirm requirements in advance.</li>
+    <li>Passports should generally be valid for at least <strong>6 months</strong> beyond your intended stay (requirements vary by destination).</li>
+    <li>Travelers to/transiting the USA may require an <strong>ESTA</strong> (Visa Waiver Program) and travelers to/transiting Australia may require an <strong>ETA</strong>, where applicable. If your itinerary involves separate airports or connections, you are responsible for arranging transfers and confirming transit visa requirements.</li>
+    <li>We can provide general health information, but you should consult your doctor regarding vaccinations, medications, and medical advice specific to your circumstances. Requirements may change; it is your responsibility to comply with all medical guidance.</li>
+    <li>Some airlines (including but not limited to Pakistan Airlines, Air India, Jet Airways) may require full passport details to issue tickets. You must provide requested details promptly; delays may result in seat cancellation and fare differences if rebooking is required.</li>
+  </ul>
+
+  <h2>7) Final Travel Arrangements</h2>
+  <ul>
+    <li>Please ensure all travel, passport, visa, and insurance documents are in order and arrive at the airport/check-in with sufficient time.</li>
+    <li>It may be necessary to reconfirm flights with the airline prior to departure. Please request reconfirmation details at least <strong>72 hours</strong> before your outbound flight and retain any reference number/contact name provided.</li>
+    <li>Failure to reconfirm may result in denied boarding and you are unlikely to receive any refund.</li>
+  </ul>
+
+  <h2>8) Confirmation</h2>
+  <p>After booking, GlobalTravelReservation will send a confirmation email acknowledging your service booking request. This email is an acceptance of your purchase request only; final confirmation is subject to availability and supplier approval.</p>
+
+  <h2>9) Complaints</h2>
+  <ul>
+    <li>As agents, GlobalTravelReservation will assist you with complaints where possible. You may contact our Customer Services for support.</li>
+    <li>However, the contract(s) for your travel arrangements are between you and the principal(s) or supplier(s). Any queries or concerns relating to the travel arrangements should be addressed to them.</li>
+    <li>If you experience a problem while traveling, you must report it to the principal/supplier (or their local agent/supplier) <strong>immediately</strong>. Failure to follow this procedure may reduce or eliminate any compensation you may be entitled to.</li>
+    <li>If you wish to complain after returning home, write to the principal/supplier using the contact details provided in your confirmation documents.</li>
+  </ul>
+
+  <h2>10) Service Charges</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Charge (USD)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Admin Charges</td><td>50</td></tr>
+        <tr><td>Credit card surcharge</td><td>0%</td></tr>
+        <tr><td>Delivering tickets by hand</td><td>Option not available</td></tr>
+        <tr><td>Tickets dispatched by courier</td><td>2</td></tr>
+        <tr><td>Tickets dispatched by insured delivery</td><td>5</td></tr>
+        <tr><td>International telephone/fax calls (provider)</td><td>As specified by the provider</td></tr>
+        <tr><td>Tailor-made itinerary planning</td><td>No charge</td></tr>
+        <tr><td>Bookings</td><td>No charge</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="contact-box">
+    <h3 style="margin-top:0;">Contact Us</h3>
+    <p>For questions about these Terms & Conditions or your booking:</p>
+    <p style="margin-bottom:6px;"><strong>Global Travel Reservations (GlobalTravelReservation)</strong></p>
+    <p style="margin-bottom:6px;">📧 <a href="mailto:info@GlobalTravelReservation.com">info@GlobalTravelReservation.com</a></p>
+    <p style="margin-bottom:0;">📞 <a href="tel:+18888513533">+1 (888) 851-3533</a> (24/7)</p>
+  </div>
+
+  <p class="disclaimer">
+    <strong>Disclaimer:</strong> Global Travel Reservations LLC is an independent travel agency acting as an agent for third-party suppliers (airlines, hotels, tour operators, etc.). We are not responsible for the acts, omissions, or failures of suppliers or for the services they provide. All bookings are subject to supplier availability and the supplier’s terms and conditions. Prices, schedules, and policies are subject to change without notice. This document is provided for informational purposes and may require legal review to ensure compliance with applicable laws in your jurisdiction.
+  </p>
+</div>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Global Travel Reservations</div>
+        <p class="footer-brand-desc">"Where Every Mile Counts — Travelling with Purpose and Passion."</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-links">
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="refund-policy.html">Refund Policy</a></li>
+          <li><a href="terms.html" class="active-link">Terms & Conditions</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-legal">© 2023–2026 Global Travel Reservations LLC. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Theme Toggle & Active TOC Link (same as previous pages)
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+function getTheme(){return localStorage.getItem('gtr-theme')||'light';}
+function applyTheme(theme){html.setAttribute('data-theme',theme);localStorage.setItem('gtr-theme',theme);themeToggle.textContent=theme==='dark'?'🌙':'☀️';}
+applyTheme(getTheme());
+themeToggle.addEventListener('click',()=>{applyTheme(getTheme()==='light'?'dark':'light');});
+const sections=document.querySelectorAll('.policy-section');
+const tocLinks=document.querySelectorAll('.toc-link');
+const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){tocLinks.forEach(link=>link.classList.remove('active'));const activeLink=document.querySelector(`.toc-link[href="#${entry.target.id}"]`);if(activeLink)activeLink.classList.add('active');}});},{rootMargin:'-20% 0px -75% 0px'});
+sections.forEach(section=>observer.observe(section));
+</script>
+</body>
+</html>
