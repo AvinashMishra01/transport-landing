@@ -15,11 +15,43 @@
 [data-theme="dark"] { --bg-primary: #0F172A; --bg-secondary: #1E293B; --bg-nav: rgba(15,23,42,0.96); --bg-hero: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #1E3A5F 100%); --bg-card: #1E293B; --bg-highlight: rgba(14,165,233,0.08); --bg-badge: rgba(14,165,233,0.12); --text-primary: #F1F5F9; --text-secondary: #CBD5E1; --text-muted: #94A3B8; --text-gold: #38BDF8; --border-color: rgba(14,165,233,0.12); --border-strong: rgba(14,165,233,0.25); --shadow-card: 0 4px 24px rgba(0,0,0,0.3); --shadow-hover: 0 12px 40px rgba(0,0,0,0.4); --divider: rgba(255,255,255,0.06); --gold: #38BDF8; --gold-light: #7DD3FC; }
 html { scroll-behavior: smooth; }
 body { font-family: 'DM Sans', sans-serif; background: var(--bg-primary); color: var(--text-secondary); transition: background var(--transition), color var(--transition); overflow-x: hidden; }
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 16px 60px; background: var(--bg-nav); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(14,165,233,0.15); transition: background var(--transition); }
-.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.nav-logo-text { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #FFFFFF; }
-.nav-logo-text span { color: #7DD3FC; }
-.nav-links { display: none; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 10px 60px; background: var(--bg-nav); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(14,165,233,0.15); transition: background var(--transition); }
+
+ .nav-logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+
+  /* Premium Glow Effect */
+  background: rgba(255,255,255,0.06);
+  padding: 6px;
+
+  box-shadow:
+    0 0 18px rgba(59,130,246,0.45),
+    0 0 35px rgba(59,130,246,0.25);
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.nav-logo img:hover {
+  transform: scale(1.06);
+  box-shadow:
+    0 0 24px rgba(59,130,246,0.65),
+    0 0 45px rgba(59,130,246,0.35);
+}
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { color: rgba(240,249,255,0.7); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: #7DD3FC; }
+
 .nav-right { display: flex; align-items: center; gap: 16px; }
 .nav-phone { color: #7DD3FC; font-weight: 600; font-size: 14px; text-decoration: none; transition: color 0.2s; }
 .nav-phone:hover { color: #FFFFFF; }
@@ -204,15 +236,15 @@ footer { background: #082F49; padding: 50px 60px 28px; border-top: 1px solid rgb
 
 <!-- NAVBAR -->
 <nav>
-  <a href="index.html" class="nav-logo">
-    <svg viewBox="0 0 52 52" fill="none" width="28" height="28">
-      <circle cx="26" cy="26" r="20" fill="rgba(14,165,233,0.12)" stroke="#0EA5E9" stroke-width="1.5"/>
-      <ellipse cx="26" cy="26" rx="20" ry="8" stroke="rgba(14,165,233,0.5)" stroke-width="1" fill="none"/>
-      <ellipse cx="26" cy="26" rx="10" ry="20" stroke="rgba(14,165,233,0.5)" stroke-width="1" fill="none"/>
-      <line x1="6" y1="26" x2="46" y2="26" stroke="rgba(14,165,233,0.35)" stroke-width="1"/>
-    </svg>
-    <span class="nav-logo-text">Global<span>Travel</span></span>
-  </a>
+   <div class="nav-logo">
+  <img src="./logo.png" alt="Global Travel Reservations Logo">
+</div>
+  <ul class="nav-links">
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact">Contact Us</a></li>
+  </ul>
   <div class="nav-right">
     <a href="tel:+18888513533" class="nav-phone">☎ +1 (888) 851-3533</a>
   </div>
