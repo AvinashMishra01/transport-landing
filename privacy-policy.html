@@ -7,7 +7,7 @@
 <title>Privacy Policy — Global Travel Reservations</title>
 <meta name="description" content="Learn how Global Travel Reservations collects, uses, and protects your personal data. Your privacy and security are our top priorities.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<!-- <link rel="stylesheet" href="footer.css"> -->
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -298,9 +298,12 @@ footer { background: #082F49; padding: 50px 60px 28px; border-top: 1px solid rgb
 
 
 <nav>
-   <div class="nav-logo">
+   <!-- <div class="nav-logo">
   <img src="./logo.png" alt="Global Travel Reservations Logo">
-</div>
+</div> -->
+<a href="index.html" class="nav-logo">
+  <img src="./logo.png" alt="Global Travel Reservations Logo">
+</a>
   <!-- <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="index.html#contact">Contact</a></li>
@@ -308,10 +311,10 @@ footer { background: #082F49; padding: 50px 60px 28px; border-top: 1px solid rgb
 
 
    <ul class="nav-links">
-    <li><a href="#destinations">Destinations</a></li>
-    <li><a href="#packages">Packages</a></li>
-    <li><a href="#why">Why Us</a></li>
-    <li><a href="#contact">Contact Us</a></li>
+    <li><a href="index.html#destinations">Destinations</a></li>
+    <li><a href="index.html#packages">Packages</a></li>
+    <li><a href="index.html#why">Why Us</a></li>
+    <li><a href="index.html#contact">Contact Us</a></li>
   </ul>
   <div class="nav-right">
     <a href="tel:+18888513533" class="nav-phone">☎ +1 (888) 851-3533</a>
@@ -444,19 +447,25 @@ footer { background: #082F49; padding: 50px 60px 28px; border-top: 1px solid rgb
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
-      <div>
+      <!-- <div>
         <div class="footer-brand-name">Global Travel Reservations</div>
         <p class="footer-brand-desc">"Where Every Mile Counts — Travelling with Purpose and Passion."</p>
+      </div> -->
+       <div>
+        <div class="footer-brand-name">Global Travel Reservations</div>
+        <p class="footer-brand-desc">"Where Every Mile Counts — Travelling with Purpose and Passion." An independent travel agency delivering premium experiences worldwide.</p>
+        <div class="footer-contact-item">📍 30 N Gould St Ste N, Sheridan, WY 82801, USA</div>
+        <div class="footer-contact-item">📧 <a href="mailto:support@globaltravelsreservations.com" style="color:var(--gold);text-decoration:none;transition:color 0.4s;">support@globaltravelsreservations.com</a></div>
+        <div class="footer-contact-item">📞 <strong><a href="tel:+18888513533" style="color:var(--gold-light);text-decoration:none;transition:color 0.4s;">+1 (888) 851-3533</a></strong></div>
       </div>
       <div>
         <div class="footer-col-title">Navigate</div>
-        <ul class="footer-links">
-       <li><a href="#">Home</a></li>
-          <li><a href="#destinations">Destinations</a></li>
-          <li><a href="#packages">Packages</a></li>
-          <!-- <li><a href="#">Blog</a></li> -->
+         <ul class="footer-links">
+           <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#destinations">Destinations</a></li>
+          <li><a href="index.html#packages">Packages</a></li>
           <li><a href="about-us.html">About Us</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
         </ul>
       </div>
       <div>
@@ -474,6 +483,7 @@ footer { background: #082F49; padding: 50px 60px 28px; border-top: 1px solid rgb
   </div>
 </footer>
 
+<!-- <script src="footer.js"></script> -->
 <script>
 // Theme Toggle & Active TOC Link (same as Refund Policy)
 const themeToggle = document.getElementById('themeToggle');
