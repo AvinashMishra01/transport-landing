@@ -396,7 +396,7 @@
 
   .trust-row b { color: var(--text-primary); }
 
-  .logos {
+  /* .logos {
     display: flex;
     align-items: center;
     gap: 28px;
@@ -408,8 +408,9 @@
   .logo-item {
     font-size: 24px;
     font-weight: 800;
-    color: var(--text-primary);
-    letter-spacing: -0.04em;
+    background: #ffff;
+    padding: 7px;
+    border-radius: 5px;
   }
 
   .logo-small {
@@ -418,8 +419,28 @@
     color: var(--text-primary);
     text-transform: uppercase;
     line-height: 1.05;
-  }
+  } */
+.logos {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  padding-top: 26px;
+  margin-top: auto;
 
+}
+
+.logo-item {
+  padding: 7px;
+  border-radius: 5px;
+}
+
+.logo-item img {
+  height: 40px;
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
+}
+[data-theme="light"] .logo-item img { filter: none; }
   /* RIGHT SIDE */
   .right-panel {
     position: relative;
@@ -1017,10 +1038,11 @@
     </div>
 
     <div class="logos">
-      <div class="logo-item">IATA</div>
-      <div class="logo-item">ARC</div>
+      <div class="logo-item"> <img src="iata-logo.png" alt="IATA Logo"> </div>
+      <div class="logo-item"> <img src="arc-logo.png" alt="ARC Logo"> </div>
+      <div class="logo-item"> <img src="iatan-logo.png" alt="IATAN Logo"> </div>
       <div class="logo-item">
-        BBB <span class="logo-small">A+ Accredited<br>Business</span>
+        <img src="bbb-log.png" alt="BBB Logo">
       </div>
     </div>
   </section>
