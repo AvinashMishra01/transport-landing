@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Private Quote Result — Global Travel Reservations</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: background 0.35s ease, color 0.35s ease;
+  }
+
+  :root {
+    --gold: #0EA5E9;
+    --gold-light: #7DD3FC;
+    --gold-dark: #0284C7;
+    --accent: #E8533A;
+    --radius: 20px;
+    --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  [data-theme="light"] {
+    --bg-primary: #F0F9FF;
+    --bg-secondary: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --bg-card-alt: #F8FBFF;
+    --bg-nav: rgba(12, 74, 110, 0.95);
+    --bg-footer: #082F49;
+    --bg-panel: linear-gradient(180deg, rgba(12, 74, 110, 0.76) 0%, rgba(7, 89, 133, 0.62) 100%);
+    --text-primary: #0C4A6E;
+    --text-secondary: #334155;
+    --text-muted: #64748B;
+    --text-hero: #F0F9FF;
+    --text-hero-sub: rgba(240,249,255,0.72);
+    --text-hero-muted: rgba(240,249,255,0.55);
+    --shadow-card: 0 10px 30px rgba(14,165,233,0.10);
+    --shadow-hover: 0 18px 45px rgba(14,165,233,0.18);
+    --border-subtle: rgba(14,165,233,0.12);
+    --border-input: #BAE6FD;
+    --divider: rgba(14,165,233,0.15);
+    --footer-text: rgba(240,249,255,0.42);
+    --footer-link: rgba(240,249,255,0.46);
+    --footer-link-hover: #7DD3FC;
+    --footer-divider: rgba(255,255,255,0.08);
+  }
+
+  [data-theme="dark"] {
+    --bg-primary: #020617;
+    --bg-secondary: #0F172A;
+    --bg-card: #0F172A;
+    --bg-card-alt: #111827;
+    --bg-nav: rgba(2, 6, 23, 0.95);
+    --bg-footer: #020617;
+    --bg-panel: linear-gradient(180deg, rgba(2, 6, 23, 0.84) 0%, rgba(15, 23, 42, 0.78) 100%);
+    --text-primary: #F1F5F9;
+    --text-secondary: #CBD5E1;
+    --text-muted: #94A3B8;
+    --text-hero: #F8FAFC;
+    --text-hero-sub: rgba(241,245,249,0.68);
+    --text-hero-muted: rgba(241,245,249,0.46);
+    --shadow-card: 0 10px 30px rgba(0,0,0,0.28);
+    --shadow-hover: 0 18px 45px rgba(0,0,0,0.45);
+    --border-subtle: rgba(14,165,233,0.12);
+    --border-input: #334155;
+    --divider: rgba(14,165,233,0.12);
+    --footer-text: rgba(241,245,249,0.36);
+    --footer-link: rgba(241,245,249,0.42);
+    --footer-link-hover: #7DD3FC;
+    --footer-divider: rgba(255,255,255,0.06);
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  /* ===== THEME TOGGLE ===== */
+  .theme-toggle {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: var(--bg-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 30px rgba(14,165,233,0.28);
+    transition: transform 0.25s ease, background 0.35s ease;
+  }
+  .theme-toggle:hover { transform: scale(1.08); }
+  .toggle-icon {
+    position: absolute;
+    font-size: 22px;
+    transition: all 0.35s ease;
+  }
+  .sun-icon { opacity: 1; transform: rotate(0deg) scale(1); }
+  .moon-icon { opacity: 0; transform: rotate(-180deg) scale(0.5); }
+  [data-theme="dark"] .sun-icon { opacity: 0; transform: rotate(180deg) scale(0.5); }
+  [data-theme="dark"] .moon-icon { opacity: 1; transform: rotate(0deg) scale(1); }
+
+  /* ===== NAVBAR ===== */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 60px;
+    background: var(--bg-nav);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  /* .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-logo img {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+    padding: 5px;
+    background: rgba(255,255,255,0.06);
+    box-shadow: 0 0 18px rgba(59,130,246,0.35);
+    border: 1px solid rgba(255,255,255,0.10);
+  } */
+ .nav-logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+
+  /* Premium Glow Effect */
+  background: rgba(255,255,255,0.06);
+  padding: 6px;
+
+  box-shadow:
+    0 0 18px rgba(59,130,246,0.45),
+    0 0 35px rgba(59,130,246,0.25);
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.nav-logo img:hover {
+  transform: scale(1.06);
+  box-shadow:
+    0 0 24px rgba(59,130,246,0.65),
+    0 0 45px rgba(59,130,246,0.35);
+}
+  .nav-brand {
+    color: var(--text-hero);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .nav-brand span {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-hero-sub);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(240,249,255,0.78);
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background: var(--gold-light);
+    transition: width 0.25s ease;
+  }
+
+  .nav-links a:hover { color: #fff; }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-phone {
+    color: var(--gold-light);
+    font-weight: 700;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  /* ===== MAIN PAGE ===== */
+  .page-wrap {
+    min-height: calc(100vh - 74px);
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+
+  /* LEFT SIDE */
+  .left-panel {
+    background: var(--bg-secondary);
+    padding: 70px 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hero-copy {
+    max-width: 680px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-badge, rgba(14,165,233,0.10));
+    border: 1px solid var(--border-subtle);
+    color: var(--gold-dark);
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .route-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 3vw, 78px);
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+    color: var(--text-primary);
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  .route-meta {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 26px;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--divider);
+    margin: 0 0 18px;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+
+  .price-block .old-price {
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-decoration: line-through;
+    margin-bottom: 6px;
+  }
+
+  .price-block .deal-line {
+    font-size: 16px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .info-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #64748B;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+
+  .big-price {
+    font-size: clamp(56px, 5vw, 82px);
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+    color: var(--text-primary);
+    font-weight: 800;
+  }
+
+  .asterisk {
+    font-size: 34px;
+    vertical-align: top;
+    margin-left: 4px;
+  }
+
+  .edit-btn {
+    align-self: center;
+    margin-top: 8px;
+    background: #F3F4F6;
+    border: none;
+    border-radius: 999px;
+    padding: 16px 24px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #222;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    transition: all .2s ease;
+  }
+  .edit-btn:hover {
+    background: #ECEFF3;
+    transform: translateY(-1px);
+  }
+  .edit-btn .sep {
+    width: 1px;
+    height: 18px;
+    background: #222;
+    opacity: .9;
+  }
+  .edit-btn .pen {
+    font-size: 18px;
+    color: #222;
+  }
+
+  .trust-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-top: 16px;
+    border-top: 1px solid var(--divider);
+    margin-bottom: 30px;
+  }
+
+  .stars {
+    display: inline-flex;
+    gap: 2px;
+  }
+
+  .star {
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #10B981;
+    color: #fff;
+    font-size: 12px;
+  }
+
+  .star.empty { background: #D1D5DB; }
+
+  .trust-row b { color: var(--text-primary); }
+
+  .logos {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    padding-top: 26px;
+    margin-top: auto;
+  }
+
+  .logo-item {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.04em;
+  }
+
+  .logo-small {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    line-height: 1.05;
+  }
+
+  /* RIGHT SIDE */
+  .right-panel {
+    position: relative;
+    background:
+      linear-gradient(180deg, rgba(12, 74, 110, 0.85), rgba(7, 89, 133, 0.70)),
+      url('https://images.unsplash.com/photo-1529253355930-ddbe423a2ac7?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+    border-radius:40px 0 0 40px  ;
+    padding: 26px 26px 120px;
+    overflow: visible;
+    min-height: 100%;
+    color: white;
+  }
+
+  .top-tools {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-bottom: 34px;
+    flex-wrap: wrap;
+  }
+
+  .pill {
+    background: rgba(8, 22, 34, 0.92);
+    color: white;
+    border-radius: 999px;
+    padding: 12px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 18px rgba(0,0,0,.16);
+  }
+
+  .pill small {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,255,255,.85);
+    line-height: 1.1;
+  }
+
+  .caret {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid #fff;
+    margin-left: 2px;
+  }
+
+  .menu-btn {
+    width: 56px;
+    height: 56px;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0,0,0,.16);
+  }
+
+  .menu-lines {
+    width: 20px;
+    height: 14px;
+    position: relative;
+  }
+  .menu-lines span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #2A2A2A;
+    border-radius: 2px;
+  }
+  .menu-lines span:nth-child(1) { top: 0; }
+  .menu-lines span:nth-child(2) { top: 6px; }
+  .menu-lines span:nth-child(3) { top: 12px; }
+
+  /* Quote stack is IN FLOW, so the page can grow and scroll */
+  .quote-stack {
+    width: min(520px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .quote-card {
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    border-radius: 22px;
+    padding: 30px 26px 24px;
+    box-shadow: 0 18px 60px rgba(0,0,0,.22);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .quote-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .quote-sub {
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+  }
+
+  .field { margin-bottom: 16px; }
+
+  .label {
+    display: block;
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    padding-left: 10px;
+  }
+
+  .input {
+    width: 100%;
+    height: 56px;
+    border: 1px solid var(--border-input);
+    border-radius: 12px;
+    padding: 0 16px;
+    font-size: 15px;
+    outline: none;
+    background: var(--bg-card-alt);
+    color: var(--text-primary);
+    transition: border-color .2s ease, box-shadow .2s ease;
+  }
+  .input::placeholder { color: var(--text-muted); }
+  .input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(14,165,233,.10);
+  }
+
+  .phone-wrap {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    border: 1px solid var(--border-input);
+    border-radius: 12px;
+    overflow: hidden;
+    height: 58px;
+    background: var(--bg-card-alt);
+  }
+
+  .country {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-right: 1px solid var(--border-input);
+    font-size: 15px;
+    color: var(--text-primary);
+    background: var(--bg-card-alt);
+  }
+
+  .flag {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+  }
+
+  .phone-input {
+    border: none;
+    outline: none;
+    padding: 0 16px;
+    font-size: 15px;
+    background: var(--bg-card-alt);
+    color: var(--text-primary);
+  }
+  .phone-input::placeholder { color: var(--text-muted); }
+
+  .submit-btn {
+    width: 100%;
+    height: 72px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 999px;
+    background: #232323;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    transition: transform .2s ease, background .2s ease;
+  }
+  .submit-btn:hover {
+    transform: translateY(-1px);
+    background: #111827;
+  }
+  .submit-btn .arrow {
+    font-size: 26px;
+    line-height: 1;
+  }
+
+  .or-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 18px 0 16px;
+    color: rgba(255,255,255,.8);
+    font-size: 15px;
+  }
+  .or-row::before,
+  .or-row::after {
+    content: "";
+    flex: 1;
+    border-top: 1px dashed rgba(255,255,255,.38);
+  }
+
+  .call-box {
+    background: var(--bg-card);
+    border: 1px solid rgba(124,197,143,.8);
+    border-radius: 999px;
+    padding: 10px 14px;
+    display: grid;
+    grid-template-columns: 54px 1fr 72px;
+    align-items: center;
+    gap: 12px;
+    overflow: hidden;
+  }
+
+  .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .call-text {
+    border-left: 1px solid rgba(47,143,87,.25);
+    padding-left: 16px;
+  }
+
+  .call-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.15;
+  }
+
+  .call-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .call-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #58a76a;
+    font-size: 26px;
+    border-left: 1px solid rgba(47,143,87,.25);
+  }
+
+  .legal-note {
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,.45);
+    padding: 0 12px;
+  }
+  .legal-note strong {
+    font-weight: 800;
+  }
+  .legal-note a {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  .floating-call {
+    position: fixed;
+    right: 18px;
+    bottom: 92px;
+    width: 58px;
+    height: 58px;
+    border: none;
+    border-radius: 16px;
+    background: #5ac26f;
+    color: #fff;
+    font-size: 26px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: 0 14px 30px rgba(0,0,0,.22);
+    z-index: 9999;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--bg-footer);
+    color: var(--footer-text);
+    padding: 70px 60px 30px;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 48px;
+    margin-bottom: 50px;
+  }
+
+  .footer-brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--gold-light);
+    margin-bottom: 14px;
+  }
+
+  .footer-brand-desc {
+    font-size: 14px;
+    color: var(--footer-text);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .footer-contact-item {
+    display: flex;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--footer-text);
+    margin-bottom: 8px;
+    align-items: center;
+  }
+
+  .footer-contact-item strong {
+    color: var(--text-hero-sub);
+  }
+
+  .footer-col-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+  }
+
+  .footer-links {
+    list-style: none;
+  }
+
+  .footer-links li {
+    margin-bottom: 10px;
+  }
+
+  .footer-links a {
+    font-size: 14px;
+    color: var(--footer-link);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover {
+    color: var(--footer-link-hover);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--footer-divider);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-legal {
+    font-size: 12px;
+    color: var(--footer-text);
+  }
+
+  .footer-disclaimer {
+    font-size: 11px;
+    color: var(--footer-text);
+    margin-top: 8px;
+    line-height: 1.6;
+    opacity: .72;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1100px) {
+    nav {
+      padding: 12px 24px;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links {
+      display: none;
+    }
+
+    .page-wrap {
+      grid-template-columns: 1fr;
+    }
+
+    .left-panel {
+      padding: 54px 24px 34px;
+    }
+
+    .right-panel {
+      border-top-left-radius: 0;
+      padding: 24px 18px 110px;
+    }
+
+    .quote-stack {
+      width: min(520px, 100%);
+    }
+
+    footer {
+      padding: 50px 24px 24px;
+    }
+
+    .footer-top {
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .route-title {
+      font-size: 34px;
+    }
+
+    .route-meta {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .big-price {
+      font-size: 54px;
+    }
+
+    .price-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .edit-btn {
+      align-self: flex-start;
+      font-size: 15px;
+    }
+
+    .quote-card {
+      padding: 24px 18px 20px;
+    }
+
+    .quote-title {
+      font-size: 18px;
+    }
+
+    .quote-sub {
+      font-size: 14px;
+    }
+
+    .input,
+    .phone-input {
+      font-size: 14px;
+    }
+
+    .submit-btn {
+      height: 62px;
+      font-size: 18px;
+    }
+
+    .call-box {
+      grid-template-columns: 48px 1fr 58px;
+    }
+
+    .call-title {
+      font-size: 16px;
+    }
+
+    .call-sub {
+      font-size: 13px;
+    }
+
+    .footer-top {
+      grid-template-columns: 1fr;
+    }
+
+    .theme-toggle {
+      bottom: 16px;
+      right: 16px;
+      width: 48px;
+      height: 48px;
+    }
+
+    .toggle-icon {
+      font-size: 20px;
+    }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg-primary); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 999px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold-light); }
+</style>
+</head>
+<body>
+
+<!-- THEME TOGGLE -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+  <span class="toggle-icon sun-icon">☀️</span>
+  <span class="toggle-icon moon-icon">🌙</span>
+</button>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="./logo.png" alt="Global Travel Reservations Logo">
+    <!-- <div class="nav-brand">
+      Global Travel Reservations
+      <span>Where Every Mile Counts</span>
+    </div> -->
+</a>
+
+  <ul class="nav-links">
+    <li><a href="index.html#destinations">Destinations</a></li>
+    <li><a href="index.html#packages">Packages</a></li>
+    <!-- <li><a href="index.html#why">Why Us</a></li> -->
+    <li><a href="index.html#contact">Contact Us</a></li>
+  </ul>
+
+  <a href="tel:+18888513533" class="nav-phone">☎ +1 (888) 851-3533</a>
+</nav>
+
+<!-- MAIN PAGE -->
+<div class="page-wrap">
+  <!-- LEFT PANEL -->
+  <section class="left-panel">
+    <div class="hero-copy">
+      <div class="hero-badge">Private Travel Quote</div>
+
+      <div class="route-title" id="routeText">New York (NYC)  <br> to<br>Mumbai (BOM)</div>
+
+      <div class="route-meta" id="routeMeta">
+        Thu, May 28 • Thu, Jun 4 • Business • Round-Trip
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="price-row">
+        <div class="price-block">
+          <div class="old-price" id="oldPrice">$3,423</div>
+          <div class="deal-line">Private Deal <span class="info-dot">i</span></div>
+          <div class="big-price">$2,695<span class="asterisk">*</span></div>
+        </div>
+
+        <button class="edit-btn" onclick="window.location.href='index.html'">
+          <span>Edit search</span>
+          <span class="sep"></span>
+          <span class="pen">✎</span>
+        </button>
+      </div>
+
+      <div class="divider" style="margin-top:18px;"></div>
+
+      <div class="trust-row">
+        <span class="stars">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star empty">★</span>
+        </span>
+        <span><b>14,249</b> reviews on</span>
+        <span style="font-weight:800; color: var(--text-primary);">★ Trustpilot</span>
+      </div>
+    </div>
+
+    <div class="logos">
+      <div class="logo-item">IATA</div>
+      <div class="logo-item">ARC</div>
+      <div class="logo-item">
+        BBB <span class="logo-small">A+ Accredited<br>Business</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RIGHT PANEL -->
+  <section class="right-panel">
+    <div class="top-tools">
+      <div class="pill">USD <span class="caret"></span></div>
+      <div class="pill">
+        <div>
+          <small>24/7 PHONE DEALS</small>
+          USA +1 (888) 851-3533
+        </div>
+        <span class="caret"></span>
+      </div>
+      <!-- <button class="menu-btn" aria-label="Menu">
+        <div class="menu-lines">
+          <span></span><span></span><span></span>
+        </div>
+      </button> -->
+    </div>
+
+    <!-- This grows naturally, so the page can scroll -->
+    <div class="quote-stack">
+      <div class="quote-card">
+        <div class="quote-title">Request your private pricing.</div>
+        <div class="quote-sub">A dedicated travel expert will review the best options for your trip.</div>
+
+        <div class="field">
+          <label class="label">Name*</label>
+          <input class="input" type="text" placeholder="Your name">
+        </div>
+
+        <div class="field">
+          <label class="label">Email*</label>
+          <input class="input" type="email" placeholder="We’ll send your flight options here">
+        </div>
+
+        <div class="field">
+          <label class="label">Phone number*</label>
+          <div class="phone-wrap">
+            <div class="country">
+              <span class="flag">🇮🇳</span>
+              <span>+91</span>
+              <span class="caret" style="border-top-color:#444;"></span>
+            </div>
+            <input class="phone-input" maxlength="10" type="tel" placeholder="XXXXX XXXXX">
+          </div>
+        </div>
+
+        <button class="submit-btn" onclick="submitQuote()">
+          <span>Get My Quote</span>
+          <span class="arrow">›</span>
+        </button>
+
+        <div class="or-row">or</div>
+
+        <div class="call-box">
+          <img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&q=80" alt="Agent">
+          <div class="call-text">
+            <div class="call-title">Call us +1 (888) 851-3533</div>
+            <div class="call-sub">Phone-exclusive savings</div>
+          </div>
+          <div class="call-icon">📞</div>
+        </div>
+      </div>
+
+      <div class="legal-note">
+        🔒 <strong>100% Secure.</strong> No obligation to book. I agree to provide my phone number and to be contacted by clicking “Get My Quote”. Your privacy is respected. <a href="terms-and-condition.html">Terms of Service</a>.
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Global Travel Reservations</div>
+        <p class="footer-brand-desc">
+          "Where Every Mile Counts — Travelling with Purpose and Passion."
+          An independent travel agency delivering premium experiences worldwide.
+        </p>
+        <div class="footer-contact-item">📍 30 N Gould St Ste N, Sheridan, WY 82801, USA</div>
+        <div class="footer-contact-item">📧 <a href="mailto:support@globaltravelsreservations.com" style="color:var(--gold);">support@globaltravelsreservations.com</a></div>
+        <div class="footer-contact-item">📞 <a href="tel:+18888513533" style="color:var(--gold-light); font-weight:700;">+1 (888) 851-3533</a></div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#destinations">Destinations</a></li>
+          <li><a href="index.html#packages">Packages</a></li>
+          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+          <li><a href="index.html#why">Why Us</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-links">
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-and-condition.html">Terms & Conditions</a></li>
+          <li><a href="refund-policy.html">Refund Policy</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Quick Contact</div>
+        <p style="font-size:13px;color:var(--footer-text);margin-bottom:16px;line-height:1.6;">
+          Our travel experts are available around the clock to assist you.
+        </p>
+        <a href="tel:+18888513533" class="edit-btn" style="display:inline-flex; font-size:14px; padding:12px 18px; margin-top:0;">
+          📞 Call Now — Free
+        </a>
+        <p style="margin-top:14px;font-size:13px;color:var(--gold-light);">
+          Exclusive phone-only deals available
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        <p class="footer-legal">© 2023–2026 Global Travel Reservations LLC. All Rights Reserved.</p>
+        <p class="footer-disclaimer">
+          Global Travel Reservations LLC (globaltravelsreservations.com) is an independent travel agency.
+          We are not affiliated with airlines, hotels, or other travel companies; any names shown are for reference only.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING CALL -->
+<button class="floating-call" onclick="window.location.href='tel:+18556283085'">📞</button>
+
+<script>
+  // ===== THEME TOGGLE =====
+  const html = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+
+  function getPreferredTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function setTheme(theme) {
+    html.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }
+
+  setTheme(getPreferredTheme());
+
+  themeToggle.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    setTheme(current === 'light' ? 'dark' : 'light');
+  });
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      setTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+
+  // ===== URL PARAMS =====
+  const params = new URLSearchParams(window.location.search);
+
+  const fromCode = params.get('location_from') || 'NYC';
+  const toCode = params.get('location_to') || 'BOM';
+  const depart = params.get('depart') || '2026-05-28';
+  const ret = params.get('return') || '2026-06-04';
+  const tripType = params.get('trip_type') || 'RT';
+  const cabinClass = params.get('class') || 'C';
+
+  const cityNames = {
+    NYC: 'New York',
+    BOM: 'Mumbai'
+  };
+
+  function formatDate(d) {
+    const dt = new Date(d);
+    return dt.toLocaleDateString('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric'
+    });
+  }
+
+  function classLabel(c) {
+    return {
+      C: 'Business',
+      F: 'First',
+      Y: 'Economy',
+      W: 'Premium'
+    }[c] || 'Business';
+  }
+
+  document.getElementById('routeText').innerHTML =
+    `${cityNames[fromCode] || fromCode} <br> to<br>${cityNames[toCode] || toCode}`;
+
+  document.getElementById('routeMeta').textContent =
+    `${formatDate(depart)} • ${formatDate(ret)} • ${classLabel(cabinClass)} • ${tripType === 'RT' ? 'Round-Trip' : 'One-way'}`;
+
+  // Optional: adjust old price by class
+  document.getElementById('oldPrice').textContent = '$3,423';
+
+  function submitQuote() {
+    alert('Thanks! Your quote request has been submitted. An expert will contact you shortly.');
+  }
+</script>
+
+</body>
+</html>

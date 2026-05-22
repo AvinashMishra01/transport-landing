@@ -1514,7 +1514,7 @@
   <ul class="nav-links">
     <li><a href="#destinations">Destinations</a></li>
     <li><a href="#packages">Packages</a></li>
-    <li><a href="#why">Why Us</a></li>
+   
     <li><a href="#contact">Contact Us</a></li>
   </ul>
   <a href="tel:+18888513533" class="nav-phone">☎ +1 (888) 851-3533</a>
@@ -1787,7 +1787,9 @@
             <option value="4">2 Adults + 1 Child</option>
           </select>
         </div>
-        <button class="search-btn" onclick="alert('Our agents are available 24/7 — call +1 (888) 851-3533 for instant booking!')">🔍 Search Destination</button>
+        <!-- <button class="search-btn" onclick="handleSearch()" onclick="alert('Our agents are available 24/7 — call +1 (888) 851-3533 for instant booking!')">🔍 Search Destination</button> -->
+        <!-- <button class="search-btn" onclick="handleSearch()">🔍 Search Destination</button> -->
+        <button class="search-btn"  onclick="handleSearch()">🔍 Search Destination</button>
         <p class="search-note">🔒 Secure. <span>Best Price Guarantee.</span> No hidden fees.</p>
       </div>
     </div>
@@ -1916,7 +1918,7 @@
       <a href="#packages" class="btn-primary" style="font-size:14px;padding:12px 24px;">View All →</a>
     </div>
     <div class="dest-grid">
-      <div class="dest-card">
+      <div class="dest-card" onclick="handleSearch()">
         <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80" alt="London">
         <div class="dest-overlay"></div>
         <div class="dest-info">
@@ -1926,7 +1928,7 @@
           <div class="dest-price"><span class="dest-old">$2,662</span> &nbsp;<strong>from $1,929</strong></div>
         </div>
       </div>
-      <div class="dest-card">
+      <div class="dest-card" onclick="handleSearch()">
         <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80" alt="Paris">
         <div class="dest-overlay"></div>
         <div class="dest-info">
@@ -1936,7 +1938,7 @@
           <div class="dest-price"><span class="dest-old">$2,873</span> &nbsp;<strong>from $2,009</strong></div>
         </div>
       </div>
-      <div class="dest-card">
+      <div class="dest-card" onclick="handleSearch()">
         <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=80" alt="Dubai">
         <div class="dest-overlay"></div>
         <div class="dest-info">
@@ -1946,7 +1948,7 @@
           <div class="dest-price"><span class="dest-old">$3,220</span> &nbsp;<strong>from $2,025</strong></div>
         </div>
       </div>
-      <div class="dest-card">
+      <div class="dest-card" onclick="handleSearch()">
         <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80" alt="Tokyo">
         <div class="dest-overlay"></div>
         <div class="dest-info">
@@ -1986,7 +1988,7 @@
               <span class="pkg-price-old">from $711</span>
               <span class="pkg-price-new">$634</span>
             </div>
-            <button class="pkg-btn">Book Now</button>
+            <button class="pkg-btn" onclick="handleSearch()">Book Now</button>
           </div>
         </div>
       </div>
@@ -2005,7 +2007,7 @@
               <span class="pkg-price-old">Was $465</span>
               <span class="pkg-price-new">$350</span>
             </div>
-            <button class="pkg-btn">Book Now</button>
+            <button class="pkg-btn" onclick="handleSearch()">Book Now</button>
           </div>
         </div>
       </div>
@@ -2024,7 +2026,7 @@
               <span class="pkg-price-old">&nbsp;</span>
               <span class="pkg-price-new">$850</span>
             </div>
-            <button class="pkg-btn">Book Now</button>
+            <button class="pkg-btn" onclick="handleSearch()">Book Now</button>
           </div>
         </div>
       </div>
@@ -2085,7 +2087,7 @@
       <div class="quote-phone">
         <div class="quote-phone-icon">📞</div>
         <div>
-          <div class="quote-phone-num">+1 (888) 851-3533</div>
+          <div class="quote-phone-num"><a href="tel:+18888513533" class="nav-phone">☎ +1 (888) 851-3533</a></div>
           <div class="quote-phone-sub">Exclusive phone-only deals available</div>
         </div>
       </div>
@@ -2216,6 +2218,7 @@
           <!-- <li><a href="#">Blog</a></li> -->
           <li><a href="about-us.html">About Us</a></li>
           <li><a href="#contact">Contact Us</a></li>
+           <li><a href="#why">Why Us</a></li>
         </ul>
       </div>
       <div>
@@ -2859,6 +2862,65 @@ function getSelectedLocations() {
 
 // ---- Init when Google Maps loads ----
 window.initGooglePlaces = initGooglePlaces;
+
+
+// ===== HANDLE SEARCH BUTTON =====
+// function handleSearch() {
+//   const activeTab = document.querySelector('.search-tab.active')?.innerText.trim() || 'Hotels';
+//   const fromInput = document.getElementById('pickup-input')?.value || '';
+//   const toInput = document.getElementById('drop-input')?.value || '';
+//   const dateInputs = document.querySelectorAll('.search-row input[type="date"]');
+//   const departDate = dateInputs[0]?.value || '';
+//   const returnDate = dateInputs[1]?.value || '';
+//   const passengers = document.querySelector('.search-field select')?.value || '1';
+
+//   // Build query string
+//   const params = new URLSearchParams({
+//     type: activeTab,
+//     from: fromInput,
+//     to: toInput,
+//     depart: departDate,
+//     return: returnDate,
+//     passengers: passengers,
+//     trip_type: returnDate ? 'RT' : 'OW',
+//     class: 'C'
+//   });
+
+//   // Redirect to results page
+//   window.location.href = `search-results.html?${params.toString()}`;
+// }
+
+function handleSearch() {
+  const fromInput = document.getElementById('pickup-input')?.value || 'New York';
+  const toInput = document.getElementById('drop-input')?.value || 'Mumbai';
+  const dateInputs = document.querySelectorAll('.search-row input[type="date"]');
+  const departDate = dateInputs[0]?.value || '2026-05-28';
+  const returnDate = dateInputs[1]?.value || '2026-06-04';
+  const passengers = document.querySelector('.search-field select')?.value || '1';
+
+  const fromCode = fromInput || 'NYC'; //.slice(0, 3)
+  const toCode = toInput || 'BOM'; //.slice(0, 3)
+
+  const params = new URLSearchParams({
+    location_from: fromCode,
+    location_to: toCode,
+    from_name: fromInput,
+    to_name: toInput,
+    class: 'C',
+    trip_type: returnDate ? 'RT' : 'OW',
+    passengers: passengers,
+    depart: departDate,
+    adults: passengers,
+    children: '0',
+    infants: '0',
+    return: returnDate
+  });
+
+  window.location.href = `result.html?${params.toString()}`;
+}
+// =============================================
+// SEARCH & REDIRECT TO RESULTS PAGE
+// =============================================
 
 // Start initialization
 // initGooglePlaces();
